@@ -4,31 +4,52 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Page Title</title>
+    <title>wecubs.com</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="signup.css" />
+    <link rel="shortcut icon" href="icon/icon.png" type="image/x-icon" />
 </head>
 
 <body>
     <div class="main_div">
-        <img class="logo" src="logo/wecubs.png" alt="wecubs.com">
-        <hr>
-        <h1 class="log_msg">Log In</h1>
+        <img class="logo" src="logo/wecubs.png" alt="wecubs.com" />
+        <hr />
+        <h1 class="signup_msg">Sign Up</h1>
         <form class="login_form" action="/" method="POST">
-            <p class="login_name_p">Enter Your Username :</p>
-            <input class="login_name" type="text" name="name" placeholder="username Here" />
-            <p class="login_email_p">Enter Your Email :</p>
-            <input class="login_email" type="email" name="email" placeholder="Email Here" />
-            <input class="login_submit" type="submit" />
-        </form>
+        <p class="F_name">Enter You Full Name</p>
+        <input type="text" placeholder="Full Name Here">
+        <p class="F_name">Enter You Nick Name</p>
+        <input type="text" placeholder="Nick Name Here">
+        <p class="F_name">Enter New Password</p>
+        <input type="password" placeholder="new password here">
+        <p class="F_name">Re-Enter New Password</p>
+        <input type="password" placeholder="re-enter new password here">
+        <p class="F_name">Enter Your Age</p>
+        <input type="number" max="150" min="10" placeholder="Enter Your Age">
+        <p class="F_name">Enter Your Country name</p>
+       <select name="Country">
+        <option value="Bangladesh"><img src="/Flag/bd.png"> Bangladesh</option>
+        <option value="India">India</option>
+        <option value="Nepal">Nepal</option>
+        <option value="China">China</option>
+       </select>
+        <p class="F_name">Enter Your City Name</p>
+        <input type="text" placeholder="Enter Your city name ">
+        <p class="F_name">ZIP Code</p>
+        <input type="text" placeholder="Zip Code Here">
+        <p class="F_name">Enter Your Birthday</p>
+        <input type="date" placeholder="Enter Your Birthday">
+        <p class="F_name">Enter Your Mobile Number</p>
+        <input type="tel" placeholder="Enter Your Mobile Number">
+    </form>
         <div class="under_form_text">
-            <a class="under_form_text_a" href="#"><p>Forgot Password</p></a>
-            <a class="under_form_text_a" href="#"><p>I don't have account</p></a>
+            <a class="under_form_text_a" href="#">
+                <p>already have account</p>
+            </a>
         </div>
-        
     </div>
+    <script src="signup.js"></script>
 </body>
 
 </html>

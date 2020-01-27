@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>
     <link rel="icon" href="icon/icon.png">
 </head>
 
@@ -18,11 +17,11 @@
         <hr>
         <h1 class="log_msg">Log In</h1>
         <form class="login_form" action="/" method="POST">
-            <p class="login_name_p">Enter Your Username :</p>
-            <input class="login_name" type="text" name="name" placeholder="username Here" />
-            <p class="login_email_p">Enter Your Email :</p>
-            <input class="login_email" type="email" name="email" placeholder="Email Here" />
-            <input class="login_submit" type="submit" />
+            <p class="login_name_p">Enter Your Username Or Email:</p>
+            <input class="login_name" type="text" name="name" placeholder="username or email Here" />
+            <p class="login_email_p">Enter Your Password :</p>
+            <input class="login_email" type="password" name="email" placeholder="Email Here" />
+            <button class="login_submit">Log In</button>
         </form>
         <div class="under_form_text">
             <a class="under_form_text_a" href="#"><p>Forgot Password</p></a>
@@ -30,6 +29,7 @@
         </div>
         
     </div>
+    <script src="main.js"></script>
 </body>
 
 </html>

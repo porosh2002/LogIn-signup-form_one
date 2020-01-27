@@ -5,8 +5,17 @@
 
 body {
     background-color: rgb(31, 31, 31);
+    color: #ffffff;
+    font-size: medium;
+    font-family: Arial, Helvetica, sans-serif;
 }
-
+.logo {
+    height: 55px;
+    margin-bottom: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 .main_div {
     position: absolute;
     top: 50%;
@@ -16,90 +25,18 @@ body {
     width: 350px;
     border-radius: 7px;
 }
-
-.log_msg {
-    margin-top: 20px;
-    background-color: transparent;
-    text-align: center;
-    color: #ffffff;
-    font-family: "Montserrat", sans-serif;
-    letter-spacing: 5px;
-}
-
-.login_form {
-    margin-top: 70px;
-}
-
-.login_name_p,
-.login_email_p {
-    text-align: center;
-    font-size: 17px;
-    font-family: "Montserrat", sans-serif;
-    letter-spacing: 1.5px;
-    font-weight: 400;
-    color: #7fcd91;
-}
-
-.login_name,
-.login_email {
-    margin-top: 30px;
-    margin-bottom: 30px;
-    height: 25px;
-    width: 90%;
-    border: none;
-    text-align: center;
-    background-color: transparent;
-    border-bottom: 1px solid yellowgreen;
-    color: rgb(255, 254, 253);
-    font-size: 16px;
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
-}
-
-.login_submit {
-    height: 40px;
-    width: 30%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    border: none;
-    background-color: #2db171;
-    font-size: 20px;
-    font-weight: 500;
-    font-family: sans-serif;
-    border-radius: 7px;
-    padding-top: 2.5px;
-    cursor: pointer;
-}
-
-.login_submit:hover {
-    background-color: #0be888;
-}
-
-.under_form_text {
-    margin-top: 50px;
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 200px;
-}
-
 .under_form_text_a {
     text-decoration: none;
     color: rgb(245, 187, 79);
     font-size: 16px;
     font-family: sans-serif;
+    text-align: center;
 }
-
-.under_form_text_a:hover {
-    color: #ff971d;
-    text-decoration: underline;
-}
-
-.logo {
-    height: 55px;
-    margin-bottom: 20px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+.signup_msg {
+    margin-top: 20px;
+    background-color: transparent;
+    color: #ffffff;
+    font-family: "Montserrat", sans-serif;
+    letter-spacing: 5px;
+    text-align: center;
 }
