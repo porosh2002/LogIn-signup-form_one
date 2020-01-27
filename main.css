@@ -15,7 +15,7 @@ background-color:rgb(31,31,31);
     transform: translate(-50%,-50%);
     /* background-color: slategrey; */
     height:400px;
-    width:400px;
+    width:350px;
     border-radius:7px;
 }
 .log_msg
