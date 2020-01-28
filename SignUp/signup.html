@@ -1,39 +1,32 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>wecubs.com</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" media="screen" href="signup.css" />
-    <link rel="shortcut icon" href="icon/icon.png" type="image/x-icon" />
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='signup.css'>
+    <link rel="shortcut icon" href="/icon/icon.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 </head>
-
 <body>
-    <div class="main_div">
-        <img class="logo" src="logo/wecubs.png" alt="wecubs.com" />
-        <hr />
-        <h1 class="signup_msg">Sign Up</h1>
-        <form class="login_form" action="/" method="POST">
-        <p class="input_box_text Enter_Name">Enter You Full Name</p>
-        <input class="input_box name_input" type="text" placeholder="Full Name Here">
-        <p class="input_box_text Enter_Pass">Enter New Password</p>
-        <input class="input_box password_input" type="password" placeholder="new password here">
-        <p class="input_box_text Enter_Pass">Re-Enter New Password</p>
-        <input class="input_box password_input" type="password" placeholder="re-enter new password here">
-        <p class="input_box_text">Enter Your Email address</p>
-        <input class="input_box email_input" type="email" placeholder="Enter Your Email Address">
-
-    </form>
-        <div class="under_form_text">
-            <a class="under_form_text_a" href="index.html">
-                <p>already have account</p>
-            </a>
-        </div>
+    <div class="logo_div">
+        <img src="/logo/wecubs.png" alt="wecubs.com" class="logo">
     </div>
-    <script src="signup.js"></script>
+    <div class="under_logo_text">
+        <h1 class="create_acc">Create Account in wecubs.com</h1>
+    </div>
+    <form class="form_cls" action="">
+        <input class="input_under_form" type="email" placeholder="Enter Full Name">
+        <input class="input_under_form" type="text" placeholder="Enter Full Name">
+        <input class="input_under_form" type="password" placeholder="Enter Full Name">
+        <input class="input_under_form" type="password" placeholder="Enter Full Name">
+        <button class="btn">Register</button>
+    </form><div class="under_form">
+        <a class="uf_a" href="index.html">already have account</a>
+        <a class="uf_a" href="Forget_Pass/forgetpassword.html">forgot password</a>
+    </div>
+    <footer>©2018-2020 || wecubs.com</footer>
+    <script src='main.js'></script>
 </body>
-
 </html>
