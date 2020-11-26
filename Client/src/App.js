@@ -8,6 +8,7 @@ const Home = React.lazy(() => import("./Pages/Home"));
 const Error = React.lazy(() => import("./Pages/Error"));
 const Login = React.lazy(() => import("./Pages/Login"));
 const Signup = React.lazy(() => import("./Pages/Signup"));
+const Upload = React.lazy(() => import("./Pages/Upload"));
 class App extends Component {
   render() {
 
@@ -22,8 +23,9 @@ class App extends Component {
         <Suspense fallback={<p>Loading...</p>}>
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route exact path="/Login" component={Login} />
-            <Route exact path="/Signup" component={Signup} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/signup" component={Signup} />
+            <Route exact path="/upload" component={Upload} />
             <Route component={Error} />
           </Switch>
         </Suspense>

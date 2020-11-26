@@ -31,6 +31,7 @@ cursor:pointer;
 padding:5px 0px;
 border-radius:3px;
 transition:.3s;
+outline:none;
 &:hover {
     background-color:#343a40;
   transition:.3s;
