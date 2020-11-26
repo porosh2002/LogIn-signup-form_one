@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {Link} from 'react-router-dom'
 export const Div = styled.div`
   text-align: center;
   margin:70px 0px;
@@ -59,4 +60,9 @@ position:absolute;
 top:20px;
 right:30px;
 cursor:pointer;
+`;
+export const IconWrap = styled(Link)`
+color:#444;
+cursor:pointer;
+margin:auto 20px;
 `;
