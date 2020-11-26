@@ -1,0 +1,41 @@
+*{
+  margin:0;
+  padding:0;
+  font-family: 'Baloo Da 2';
+}
+.title{
+  font-size:1.7rem;
+  margin:50px 0px;
+  word-spacing:2px;
+  text-align: center;
+}
+.title-b{
+  color: #444;
+}
+.title-w{
+  color: #f7f7f7;
+}
+.color-oranged{
+  color: orangered;
+}
+.color-green{
+  color: #a7e9af;
+}
+@media screen and (min-width:900px){
+.modal-box{
+  width:500px;
+  height:250px;
+}
+}
+@media screen and (max-width:700px){
+.modal-box{
+  width:90%;
+  height:150px;
+}
+}
+.ab-p-50{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+}
