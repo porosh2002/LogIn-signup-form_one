@@ -49,7 +49,8 @@ transform:translate(-50%,-50%);
   box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.2);
   font-family: 'Josefin Sans';
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 0px 50px;
 }
 .logo{
   margin:5px;

@@ -64,5 +64,6 @@ cursor:pointer;
 export const IconWrap = styled(Link)`
 color:#444;
 cursor:pointer;
-margin:auto 20px;
+margin:0px 20px;
+font-size:30px;
 `;
