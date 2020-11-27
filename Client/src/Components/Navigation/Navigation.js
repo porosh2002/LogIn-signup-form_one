@@ -12,7 +12,7 @@ export default function Navigation() {
       </Link>
       <Search />
 <nav style={{margin:"18px 0px",overflow:"hidden"}}>
-<IconWrap to="#">
+<IconWrap to="/upload">
         <VscAdd />
       </IconWrap>
       <IconWrap to="#">
