@@ -1,6 +1,7 @@
 import React from "react";
 import Logo from "../../Images/logo.png";
 import { IconWrap } from "../../Styled";
+import Search from '../Search/Search'
 import { Link } from "react-router-dom";
 import { VscAdd, VscBellDot, VscAccount } from "react-icons/vsc";
 export default function Navigation() {
@@ -9,6 +10,7 @@ export default function Navigation() {
       <Link to="/">
         <img className="logo" src={Logo} alt="logo" />
       </Link>
+      <Search />
 <nav style={{margin:"18px 0px",overflow:"hidden"}}>
 <IconWrap to="#">
         <VscAdd />
