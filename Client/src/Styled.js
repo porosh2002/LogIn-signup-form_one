@@ -97,3 +97,21 @@ font-size:16px;
 border-left:none;
 cursor: pointer;
 `;
+export const DropInput = styled.input`
+padding:10px;
+width:200px;
+background-color:#317c34;
+color:#f7f7f7;
+font-size:15px;
+border-radius:5px;
+cursor: pointer;
+outline:none;
+&:hover {
+    background-color:#343a40;
+  }
+`;
+export const DIVUPLOAD = styled.div`
+margin:100px;
+display:block;
+text-align:center;
+`;
