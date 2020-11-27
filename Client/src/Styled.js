@@ -17,7 +17,7 @@ margin:10px auto;
     border: 1px solid darkgrey;
   }
   &:focus {
-    border: 1px solid royalblue;
+    border: 1px solid #66ba6a;
   }
 `;
 export const Button = styled.input`
@@ -27,7 +27,7 @@ margin:30px auto;
 font-size:18px;
 width:150px;
 color:#f7f7f7;
-background-color:royalblue;
+background-color:#317c34;
 cursor:pointer;
 padding:5px 0px;
 border-radius:3px;
@@ -111,7 +111,24 @@ outline:none;
   }
 `;
 export const DIVUPLOAD = styled.div`
-margin:100px;
+margin:70px;
 display:block;
 text-align:center;
+`;
+export const TextArea = styled.textarea`
+  font-size: 16px;
+  display:block;
+margin:10px auto;
+  width: 700px;
+  height:200px;
+  padding: 0.375rem 5px;
+  border: 1px solid grey;
+  outline: none;
+  border-radius: 3px;
+  &:hover {
+    border: 1px solid darkgrey;
+  }
+  &:focus {
+    border: 1px solid #66ba6a;
+  }
 `;

@@ -20,7 +20,7 @@ class App extends Component {
     return (
       <div>
         <Navigation />
-        <Suspense fallback={<p>Loading...</p>}>
+<Suspense fallback={<p>Loading...</p>}>
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/login" component={Login} />
