@@ -10,7 +10,8 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 const multer = require("multer");
 const cors = require("cors");
-const RegisterUserModel = require("./Register");
+const RegisterUserModel = require("./Schema/Register");
+const VideoModel = require("./Schema/Video");
 //
 // const whitelist = ['https://wecubs.com']
 // const corsOptions = {
@@ -23,11 +24,11 @@ const RegisterUserModel = require("./Register");
 //   }
 // }
 const fileupload = multer({
-  limits: {
-    fileSize: 1000000,
-  },
+  // limits: {
+  //   fileSize: 1000000,
+  // },
   fileFilter(req, file, cb) {
-    if (!file.originalname.match(/\.(jpg|png|JPG|PNG|JPEG|jpeg)$/))
+    if (!file.originalname.match(/\.(mp4)$/))
       return cb(new Error("This is not a correct format of the file"));
     cb(undefined, true);
   },
@@ -39,6 +40,21 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(helmet());
 //
+app.post("/api/Video/:id",fileupload.single("upload"),(req,res)=>{
+const VideoData = new VideoModel({
+  Video:req.file.buffer,
+  VideoID:req.params.id
+})
+VideoData.save((err, noerr) => {
+  if (err) {
+    console.log(err);
+    res.sendStatus(400);
+  }
+  if (noerr) {
+    res.sendStatus(200);
+  }
+});
+})
 app.post("/api/login", (req, res) => {
   const { email, password } = req.body;
   RegisterUserModel.findOne({ email: md5(email) }, (error, result) => {

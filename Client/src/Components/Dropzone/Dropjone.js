@@ -1,7 +1,7 @@
 import React from 'react'
 import {DropInput} from '../../Styled'
-export default function Dropjone() {
+export default function Dropjone({...other}) {
     return (
-<DropInput  type='file'/>
+<DropInput {...other}  type='file'/>
     )
 }
