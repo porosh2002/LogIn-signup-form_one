@@ -58,3 +58,19 @@ transform:translate(-50%,-50%);
   margin:5px;
   height:60px;
 }
+/* ! DropDiv */
+.DropDiv{
+  height:150px;
+  width:200px;
+  display:block;
+  margin: 0px auto;
+  border:1px solid #317c34;
+  border-radius:3px;
+  cursor: pointer;
+  outline:none;
+}
+.icon-drop{
+font-size:30px;
+color: #317c34;
+margin-top:55px;
+}
