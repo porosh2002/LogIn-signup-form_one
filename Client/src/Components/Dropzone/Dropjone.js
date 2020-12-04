@@ -2,11 +2,12 @@ import React,{useState} from 'react'
 import { VscAdd,VscSignIn} from "react-icons/vsc";
 import poster from '../../Images/poster.jpg'
 import {useDropzone} from 'react-dropzone';
-export default function Dropjone() {
+export default function Dropjone({onChange}) {
     const [yourImage,setImage]=useState([]);
     const{getRootProps,getInputProps,isDragActive} = useDropzone({
         accept:"video/*",
         onDrop:(acceptedFiles)=>{
+            onChange(acceptedFiles);
             setImage(
                 acceptedFiles.map((upFile)=>Object.assign(upFile,{
                     preview:URL.createObjectURL(upFile)
@@ -22,7 +23,6 @@ export default function Dropjone() {
         </div>
         {
             yourImage.map((upFile,i)=>{
-                console.log(upFile)
                 return(
                     <div className='VideoDiv' key={i}>
                     <video poster={poster} controls src={upFile.preview} width='300' />

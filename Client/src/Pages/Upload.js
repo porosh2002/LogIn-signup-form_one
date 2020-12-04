@@ -10,7 +10,7 @@ export class Upload extends PureComponent {
     Des: "",
   };
   OnFileUpload = (e) => {
-    this.setState({ Video: e.target.files[0] });
+    this.setState({ Video: e[0] });
   };
   OnTextUpload = (e) => {
     const { name, value } = e.target;
