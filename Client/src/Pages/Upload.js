@@ -18,7 +18,9 @@ export class Upload extends PureComponent {
   };
   UploadFile=e=>{
     const ImageID = uuidv4();
-      const {Video,Title,Des}=this.state;
+      const {Video,
+        // Title,Des
+      }=this.state;
     const formData = new FormData();
     formData.append("upload",Video);
     fetch(`${URL}api/Video/${ImageID}`, {
