@@ -78,3 +78,23 @@ color: #444;
 .VideoDiv{
   margin-top: 50px;
 }
+
+/* !Notification */
+.NotificationDiv{
+  position: absolute;
+  top:70px;
+  right:60px;
+  height:450px;
+  width:350px;
+  background-color: #5bb35f;
+  border-radius:3px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+.NotificationMessage{
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  color:#343a40;
+  font-size:25px;
+}

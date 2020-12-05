@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { VscAdd, VscBellDot, VscAccount } from "react-icons/vsc";
 export default function Navigation() {
   return (
-    <div className="navigation">
+<div className="navigation">
       <Link to="/">
         <img className="logo" src={Logo} alt="logo" />
       </Link>
@@ -22,6 +22,9 @@ export default function Navigation() {
         <VscAccount />
       </IconWrap>
 </nav>
+<div className='NotificationDiv'>
+  <p className='NotificationMessage'>No navigation</p>
+</div>
     </div>
   );
 }
