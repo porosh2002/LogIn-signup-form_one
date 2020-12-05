@@ -7,22 +7,18 @@ const bcrypt = require("bcrypt");
 const md5 = require("md5");
 const saltRounds = 10;
 require("dotenv").config();
-const { v4: uuidv4 } = require('uuid');
 const mongoose = require("mongoose");
 // const morgan = require("morgan");
 const multer = require("multer");
 const cors = require("cors");
 const RegisterUserModel = require("./Schema/Register");
+const VideoModel = require ('./Schema/Video')
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(morgan('combined'))
 app.use(bodyParser.json());
 app.use(helmet());
-//
-
-
-
-var storage = multer.diskStorage({
+const storage = multer.diskStorage({
   destination: (req, file, cb) => {
       cb(null, 'uploads/')
   },
@@ -38,8 +34,22 @@ var storage = multer.diskStorage({
   }
 })
 var upload = multer({ storage: storage }).single("file")
-app.post('/api/Video/:id', (req, res) => {
-
+app.post('/api/VideoData',(req,res)=>{
+  const {Title,Des,fileName,filePath} = req.body;
+  const VideoData = new VideoModel({
+    Title,Des,fileName,filePath
+  })
+  VideoData.save((err, noerr) => {
+    if (err) {
+      res.sendStatus(400);
+      console.log(err);
+    }
+    if (noerr) {
+      res.sendStatus(200);
+    }
+  });
+})
+app.post('/api/Video', (req, res) => {
   upload(req, res, err => {
       if (err) {
           return res.json({ success: false, err })
@@ -48,16 +58,6 @@ app.post('/api/Video/:id', (req, res) => {
   })
 
 });
-
-
-
-
-
-
-
-
-
-
 app.post("/api/login", (req, res) => {
   const { email, password } = req.body;
   RegisterUserModel.findOne({ email: md5(email) }, (error, result) => {

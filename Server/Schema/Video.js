@@ -1,13 +1,22 @@
 const mongoose = require('mongoose');
 const VideoSchema = new mongoose.Schema({
-    Video:{
+    filePath:{
         type:Buffer,
         required:true,
     },
-    VideoID:{
+    fileName:{
         type:String,
         required:true
-    }
+    },
+    Title:{
+        type:String,
+        required:true
+    },
+    Des:{
+        type:String,
+        required:true
+    },
+
 });
 const VideoModel = mongoose.model('Video', VideoSchema);
 module.exports = VideoModel;
