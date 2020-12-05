@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import DropZone from "../Components/Dropzone/Dropjone";
 import {URL} from '../serverUrl';
+import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import { DIVUPLOAD, Input, TextArea, Button } from "../Styled";
 export class Upload extends PureComponent {
@@ -22,11 +23,20 @@ export class Upload extends PureComponent {
         // Title,Des
       }=this.state;
     const formData = new FormData();
-    formData.append("upload",Video);
-    fetch(`${URL}api/Video/${ImageID}`, {
-      method: "POST",
-      body: formData,
-    })
+    const config = {
+      header: { 'content-type': 'multipart/form-data' }
+  }
+    formData.append("file",Video);
+
+    axios.post(`${URL}api/Video/${ImageID}`, formData, config).then(response=>{
+      if (response.data.success) {
+        let variable = {
+            filePath: response.data.filePath,
+            fileName: response.data.fileName
+          }
+          console.log(variable);
+      }
+})
   }
   render() {
     return (
