@@ -9,6 +9,8 @@ export class Upload extends PureComponent {
     Video: "",
     Title: "",
     Des: "",
+    fileName:'',
+    filePath:''
   };
   OnFileUpload = (e) => {
     this.setState({ Video: e[0] });
