@@ -98,3 +98,16 @@ color: #444;
   color:#343a40;
   font-size:25px;
 }
+/* ! Footer */
+.FooterDiv{
+ text-align: center;
+ background-color: #317c34;
+ color: #f7f7f7;
+}
+.FooterDiv div{
+ display: inline-block;
+ margin:20px;
+}
+.FooterDiv div a{
+color: #f7f7f7;
+}
