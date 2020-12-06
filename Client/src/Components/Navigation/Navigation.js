@@ -3,22 +3,27 @@ import Logo from "../../Images/logo.png";
 import { IconWrap } from "../../Styled";
 import Search from "../Search/Search";
 import { Link } from "react-router-dom";
-import {setAccountMenu} from '../../Redux/AccountMenu/actions'
-import {AccountMenu} from '../../Redux/AccountMenu/acc_selector'
+import {AccountMenu} from '../../Redux/AccountMenu/acc_selector';
+import {setAccountMenu} from '../../Redux/AccountMenu/actions';
+import {setNotificationMenu} from '../../Redux/NotificationMenu/actions';
+import {NotificationMenu} from '../../Redux/NotificationMenu/nof_selector';
 import { VscAdd, VscBellDot, VscAccount } from "react-icons/vsc";
 import { connect } from "react-redux";
  class Navigation extends PureComponent {
   state = {
     navOpen: false,
-    AccOpen:null,
+    AccOpen:false,
   };
   componentDidUpdate() {
-    if(this.state.navOpen !== this.props.account_menu){
+    if(this.state.AccOpen !== this.props.account_menu){
       this.setState({AccOpen:this.props.account_menu})
+    }
+    if(this.state.navOpen !== this.props.notification_menu){
+      this.setState({navOpen:this.props.notification_menu})
     }
   }
   navOpenCall = () => {
-    this.setState({ navOpen: !this.state.navOpen,AccOpen:false });
+    this.props.setNotificationMenu(!this.props.notification_menu);
   };
   AccOpenCall = () => {
     this.props.setAccountMenu(!this.props.account_menu);
@@ -69,11 +74,13 @@ import { connect } from "react-redux";
 const mapStateToProps = (state) => {
   return {
     account_menu: AccountMenu(state),
+    notification_menu:NotificationMenu(state)
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
     setAccountMenu: (status) => dispatch(setAccountMenu(status)),
+    setNotificationMenu: (status) => dispatch(setNotificationMenu(status)),
   };
 };
 export default connect(mapStateToProps,mapDispatchToProps)(Navigation);
