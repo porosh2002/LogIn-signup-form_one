@@ -3,9 +3,10 @@ import Logo from "../../Images/logo.png";
 import { IconWrap } from "../../Styled";
 import Search from "../Search/Search";
 import { Link } from "react-router-dom";
+import {AccountMenu} from '../../Redux/AccountMenu/user_selector'
 import { VscAdd, VscBellDot, VscAccount } from "react-icons/vsc";
-
-export default class Navigation extends PureComponent {
+import { connect } from "react-redux";
+ class Navigation extends PureComponent {
   state = {
     navOpen: false,
     AccOpen:false,
@@ -29,6 +30,7 @@ export default class Navigation extends PureComponent {
     }
   };
   render() {
+    console.log(this.props.account_menu);
     const { navOpen, AccOpen } = this.state;
     const NavStyle = navOpen ? null : { display: "none" };
     const AccStyle = AccOpen ? null : { display: "none" };
@@ -59,3 +61,9 @@ export default class Navigation extends PureComponent {
     );
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    account_menu: AccountMenu(state),
+  };
+};
+export default connect(mapStateToProps, null)(Navigation);
