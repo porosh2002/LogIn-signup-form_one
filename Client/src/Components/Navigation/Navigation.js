@@ -3,25 +3,25 @@ import Logo from "../../Images/logo.png";
 import { IconWrap } from "../../Styled";
 import Search from "../Search/Search";
 import { Link } from "react-router-dom";
-import {AccountMenu} from '../../Redux/AccountMenu/acc_selector';
-import {setAccountMenu} from '../../Redux/AccountMenu/actions';
-import {setNotificationMenu} from '../../Redux/NotificationMenu/actions';
-import {NotificationMenu} from '../../Redux/NotificationMenu/nof_selector';
+import { AccountMenu } from "../../Redux/AccountMenu/acc_selector";
+import { setAccountMenu } from "../../Redux/AccountMenu/actions";
+import { setNotificationMenu } from "../../Redux/NotificationMenu/actions";
+import { NotificationMenu } from "../../Redux/NotificationMenu/nof_selector";
 import { VscAdd, VscBellDot, VscAccount } from "react-icons/vsc";
 import { connect } from "react-redux";
- class Navigation extends PureComponent {
+class Navigation extends PureComponent {
   state = {
-    navOpen:this.props.notification_menu,
-    AccOpen:this.props.account_menu,
+    navOpen: this.props.notification_menu,
+    AccOpen: this.props.account_menu,
   };
-componentDidUpdate() {
-  if(this.props.notification_menu !== this.state.notification_menu){
-    this.setState({navOpen:this.props.notification_menu})
+  componentDidUpdate() {
+    if (this.props.notification_menu !== this.state.notification_menu) {
+      this.setState({ navOpen: this.props.notification_menu });
+    }
+    if (this.props.account_menu !== this.state.AccOpen) {
+      this.setState({ AccOpen: this.props.account_menu });
+    }
   }
-  if(this.props.account_menu!== this.state.AccOpen){
-    this.setState({AccOpen:this.props.account_menu})
-  }
-}
   navOpenCall = () => {
     this.props.NotificationMenu(!this.state.navOpen);
   };
@@ -29,14 +29,14 @@ componentDidUpdate() {
     this.props.setAccountMenu(!this.state.AccOpen);
   };
   CloseCall = () => {
-    this.setState({navOpen: false,AccOpen:false});
+    this.setState({ navOpen: false, AccOpen: false });
   };
   CloseCallTrue = () => {
-    const{navOpen,AccOpen} = this.state;
-    if(navOpen){
+    const { navOpen, AccOpen } = this.state;
+    if (navOpen) {
       this.props.NotificationMenu(!this.state.navOpen);
     }
-    if(AccOpen){
+    if (AccOpen) {
       this.props.setAccountMenu(!this.state.AccOpen);
     }
   };
@@ -50,7 +50,7 @@ componentDidUpdate() {
         <Link to="/">
           <img className="logo" src={Logo} alt="logo" />
         </Link>
-          <Search />
+        <Search />
         <nav style={{ margin: "18px 0px", overflow: "hidden" }}>
           <IconWrap onClick={this.CloseCall} to="/upload">
             <VscAdd />
@@ -75,13 +75,13 @@ componentDidUpdate() {
 const mapStateToProps = (state) => {
   return {
     account_menu: AccountMenu(state),
-    notification_menu:NotificationMenu(state)
+    notification_menu: NotificationMenu(state),
   };
 };
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     setAccountMenu: (status) => dispatch(setAccountMenu(status)),
     NotificationMenu: (status) => dispatch(setNotificationMenu(status)),
   };
 };
-export default connect(mapStateToProps,mapDispatchToProps)(Navigation);
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
