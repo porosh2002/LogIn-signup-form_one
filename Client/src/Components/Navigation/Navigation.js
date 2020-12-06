@@ -11,36 +11,38 @@ import { VscAdd, VscBellDot, VscAccount } from "react-icons/vsc";
 import { connect } from "react-redux";
  class Navigation extends PureComponent {
   state = {
-    navOpen: false,
-    AccOpen:false,
+    navOpen:this.props.notification_menu,
+    AccOpen:this.props.account_menu,
   };
-  componentDidUpdate() {
-    if(this.state.AccOpen !== this.props.account_menu){
-      this.setState({AccOpen:this.props.account_menu})
-    }
-    if(this.state.navOpen !== this.props.notification_menu){
-      this.setState({navOpen:this.props.notification_menu})
-    }
+componentDidUpdate() {
+  if(this.props.notification_menu !== this.state.notification_menu){
+    this.setState({navOpen:this.props.notification_menu})
   }
+  if(this.props.account_menu!== this.state.AccOpen){
+    this.setState({AccOpen:this.props.account_menu})
+  }
+}
+
   navOpenCall = () => {
-    this.props.setNotificationMenu(!this.props.notification_menu);
+    this.props.NotificationMenu(!this.state.navOpen);
   };
   AccOpenCall = () => {
-    this.props.setAccountMenu(!this.props.account_menu);
+    this.props.setAccountMenu(!this.state.AccOpen);
   };
-  CloseCall = () => {
-    this.setState({navOpen: false,AccOpen:false});
-  };
-  CloseCallTrue = () => {
-    const{navOpen,AccOpen} = this.state;
-    if(navOpen){
-      this.setState({navOpen: false});
-    }
-    if(AccOpen){
-      this.setState({AccOpen: false});
-    }
-  };
+  // CloseCall = () => {
+  //   this.setState({navOpen: false,AccOpen:false});
+  // };
+  // CloseCallTrue = () => {
+  //   const{navOpen,AccOpen} = this.state;
+  //   if(navOpen){
+  //     this.setState({navOpen: false});
+  //   }
+  //   if(AccOpen){
+  //     this.setState({AccOpen: false});
+  //   }
+  // };
   render() {
+    console.log(this.props);
     const { navOpen, AccOpen } = this.state;
     const NavStyle = navOpen ? null : { display: "none" };
     const AccStyle = AccOpen ? null : { display: "none" };
@@ -80,7 +82,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => {
   return {
     setAccountMenu: (status) => dispatch(setAccountMenu(status)),
-    setNotificationMenu: (status) => dispatch(setNotificationMenu(status)),
+    NotificationMenu: (status) => dispatch(setNotificationMenu(status)),
   };
 };
 export default connect(mapStateToProps,mapDispatchToProps)(Navigation);
