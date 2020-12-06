@@ -22,25 +22,24 @@ componentDidUpdate() {
     this.setState({AccOpen:this.props.account_menu})
   }
 }
-
   navOpenCall = () => {
     this.props.NotificationMenu(!this.state.navOpen);
   };
   AccOpenCall = () => {
     this.props.setAccountMenu(!this.state.AccOpen);
   };
-  // CloseCall = () => {
-  //   this.setState({navOpen: false,AccOpen:false});
-  // };
-  // CloseCallTrue = () => {
-  //   const{navOpen,AccOpen} = this.state;
-  //   if(navOpen){
-  //     this.setState({navOpen: false});
-  //   }
-  //   if(AccOpen){
-  //     this.setState({AccOpen: false});
-  //   }
-  // };
+  CloseCall = () => {
+    this.setState({navOpen: false,AccOpen:false});
+  };
+  CloseCallTrue = () => {
+    const{navOpen,AccOpen} = this.state;
+    if(navOpen){
+      this.props.NotificationMenu(!this.state.navOpen);
+    }
+    if(AccOpen){
+      this.props.setAccountMenu(!this.state.AccOpen);
+    }
+  };
   render() {
     console.log(this.props);
     const { navOpen, AccOpen } = this.state;
