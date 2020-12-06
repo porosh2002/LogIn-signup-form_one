@@ -3,19 +3,25 @@ import Logo from "../../Images/logo.png";
 import { IconWrap } from "../../Styled";
 import Search from "../Search/Search";
 import { Link } from "react-router-dom";
-import {AccountMenu} from '../../Redux/AccountMenu/user_selector'
+import {setAccountMenu} from '../../Redux/AccountMenu/actions'
+import {AccountMenu} from '../../Redux/AccountMenu/acc_selector'
 import { VscAdd, VscBellDot, VscAccount } from "react-icons/vsc";
 import { connect } from "react-redux";
  class Navigation extends PureComponent {
   state = {
     navOpen: false,
-    AccOpen:false,
+    AccOpen:null,
   };
+  componentDidUpdate() {
+    if(this.state.navOpen !== this.props.account_menu){
+      this.setState({AccOpen:this.props.account_menu})
+    }
+  }
   navOpenCall = () => {
     this.setState({ navOpen: !this.state.navOpen,AccOpen:false });
   };
   AccOpenCall = () => {
-    this.setState({ AccOpen: !this.state.AccOpen,navOpen:false });
+    this.props.setAccountMenu(!this.props.account_menu);
   };
   CloseCall = () => {
     this.setState({navOpen: false,AccOpen:false});
@@ -30,7 +36,6 @@ import { connect } from "react-redux";
     }
   };
   render() {
-    console.log(this.props.account_menu);
     const { navOpen, AccOpen } = this.state;
     const NavStyle = navOpen ? null : { display: "none" };
     const AccStyle = AccOpen ? null : { display: "none" };
@@ -66,4 +71,9 @@ const mapStateToProps = (state) => {
     account_menu: AccountMenu(state),
   };
 };
-export default connect(mapStateToProps, null)(Navigation);
+const mapDispatchToProps = dispatch => {
+  return {
+    setAccountMenu: (status) => dispatch(setAccountMenu(status)),
+  };
+};
+export default connect(mapStateToProps,mapDispatchToProps)(Navigation);
