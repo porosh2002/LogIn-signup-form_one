@@ -1,5 +1,5 @@
 import React, { Component, Suspense } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route,Redirect } from "react-router-dom";
 import Footer from "./Footer";
 import { connect } from "react-redux";
 import Navigation from "./Components/Navigation/Navigation";
@@ -14,7 +14,6 @@ class App extends Component {
 
     // !!!!!!!!!! 
     const { userID } = this.props;
-    console.log(userID);
     // !!!!!!!!!! 
 
     return (
@@ -23,7 +22,7 @@ class App extends Component {
 <Suspense fallback={<p>Loading...</p>}>
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route exact path="/login" component={Login} />
+            <Route exact path="/login" render={()=>userID=== false ? (<Login />):(<Redirect to='/' />)} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/upload" component={Upload} />
             <Route component={Error} />

@@ -19,18 +19,25 @@ export default class Navigation extends PureComponent {
   CloseCall = () => {
     this.setState({navOpen: false,AccOpen:false});
   };
+  CloseCallTrue = () => {
+    const{navOpen,AccOpen} = this.state;
+    if(navOpen){
+      this.setState({navOpen: false});
+    }
+    if(AccOpen){
+      this.setState({AccOpen: false});
+    }
+  };
   render() {
     const { navOpen, AccOpen } = this.state;
     const NavStyle = navOpen ? null : { display: "none" };
     const AccStyle = AccOpen ? null : { display: "none" };
     return (
-      <div className="navigation">
-        <Link onClick={this.navCloseCall} to="/">
+      <div onClick={this.CloseCallTrue} className="navigation">
+        <Link to="/">
           <img className="logo" src={Logo} alt="logo" />
         </Link>
-        <div style={{ marginTop: "17px" }} onClick={this.CloseCall}>
           <Search />
-        </div>
         <nav style={{ margin: "18px 0px", overflow: "hidden" }}>
           <IconWrap onClick={this.CloseCall} to="/upload">
             <VscAdd />
