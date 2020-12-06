@@ -5,6 +5,7 @@ import validator from "validator";
 import { connect } from "react-redux";
 import { setUser } from "../Redux/user/actions";
 import Error from "../Components/Error/Error";
+import { Link } from "react-router-dom";
 class Login extends Component {
   constructor() {
     super();
@@ -52,7 +53,7 @@ class Login extends Component {
     const { errorHappend } = this.state;
     const styleError = errorHappend ? null : { display: "none" };
     return (
-      <div>
+      <div style={{textAlign:"center",margin:"50px 0px"}}>
         <div style={styleError}>
           <Error
             onClick={this.closeErrorDialog}
@@ -82,6 +83,7 @@ class Login extends Component {
           />
           <Button type="submit" value="Login" />
         </form>
+          <Link className='LinkToAccount' to='/signup'>create account</Link>
       </div>
     );
   }

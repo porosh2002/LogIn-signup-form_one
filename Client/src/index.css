@@ -111,3 +111,8 @@ color: #444;
 .FooterDiv div a{
 color: #f7f7f7;
 }
+/*! LinkToAccount */
+.LinkToAccount{
+  font-size:18px;
+  color: #317c34;
+}

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Button, Input } from "../Styled";
+import {Link} from 'react-router-dom';
 import { URL } from "../serverUrl";
 import validator from "validator";
 import Error from "../Components/Error/Error";
@@ -63,7 +64,7 @@ export default class Signup extends Component {
     const styleError = errorHappend ? null : { display: "none" };
     const stylePassMessage = passmatch ? null : { display: "none" };
     return (
-      <div>
+      <div style={{textAlign:"center",margin:"50px 0px"}}>
         <div style={styleError}>
           <Error
             onClick={this.closeErrorDialog}
@@ -124,6 +125,7 @@ export default class Signup extends Component {
           </div>
           <Button type="submit" value="Signup" />
         </form>
+        <Link className='LinkToAccount' to='/login'>already have account</Link>
       </div>
     );
   }
