@@ -12,7 +12,8 @@ const mongoose = require("mongoose");
 const multer = require("multer");
 const cors = require("cors");
 const RegisterUserModel = require("./Schema/Register");
-const VideoModel = require ('./Schema/Video')
+const VideoModel = require ('./Schema/Video');
+const { json } = require("body-parser");
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(morgan('combined'))
@@ -93,6 +94,16 @@ app.post("/api/register", (req, res) => {
   });
 });
 //
+app.get("/api/video",(req,res)=>{
+  VideoModel.find({},(err,data)=>{
+    if(err){
+      console.log(err);
+    }
+    if(data){
+      res.json(data)
+    }
+  })
+})
 app.listen(process.env.DB_PORT, async () => {
   try {
     await mongoose.connect("mongodb://localhost:27017/BoilerPlate_DB", {
