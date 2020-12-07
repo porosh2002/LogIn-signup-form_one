@@ -41,7 +41,6 @@ class Navigation extends PureComponent {
     }
   };
   render() {
-    console.log(this.props);
     const { navOpen, AccOpen } = this.state;
     const NavStyle = navOpen ? null : { display: "none" };
     const AccStyle = AccOpen ? null : { display: "none" };
