@@ -16,8 +16,8 @@ const VideoSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    Thumbnail:{
-        type:Buffer,
+    ThumbnailID:{
+        type:String,
         required:true
     }
 

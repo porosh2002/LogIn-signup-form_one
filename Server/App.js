@@ -8,12 +8,22 @@ const md5 = require("md5");
 const saltRounds = 10;
 require("dotenv").config();
 const mongoose = require("mongoose");
-// const morgan = require("morgan");
+const morgan = require("morgan");
 const multer = require("multer");
 const cors = require("cors");
 const RegisterUserModel = require("./Schema/Register");
 const VideoModel = require ('./Schema/Video');
-const { json } = require("body-parser");
+const ThumbModel = require ('./Schema/Thumb');
+const Thumbnail = multer({
+  limits: {
+    fileSize: 1000000,
+  },
+  fileFilter(req, file, cb) {
+    if (!file.originalname.match(/\.(jpg|png|JPG|PNG|JPEG|jpeg)$/))
+    return cb(new Error("This is not a correct format of the file"));
+    cb(undefined, true);
+  },
+});
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(morgan('combined'))
@@ -36,9 +46,9 @@ const storage = multer.diskStorage({
 })
 var upload = multer({ storage: storage }).single("file")
 app.post('/api/VideoData',(req,res)=>{
-  const {Title,Des,fileName,filePath} = req.body;
+  const {Title,Des,fileName,filePath,ThumbnailID} = req.body;
   const VideoData = new VideoModel({
-    Title,Des,fileName,filePath
+    Title,Des,fileName,filePath,ThumbnailID
   })
   VideoData.save((err, noerr) => {
     if (err) {
@@ -93,6 +103,23 @@ app.post("/api/register", (req, res) => {
     });
   });
 });
+app.post('/api/Thumb/:id', Thumbnail.single("Thumbnail"),(req,res)=>{
+  const Thumbnail = req.file.buffer;
+  const ThumbnailID = req.params.id;
+  const Thumb = new ThumbModel({
+    Thumbnail,
+    ThumbnailID,
+  });
+  Thumb.save((err, noerr) => {
+    if (err) {
+      res.sendStatus(400);
+      console.log(err);
+    }
+    if (noerr) {
+      res.sendStatus(200);
+    }
+  });
+})
 //
 app.get("/api/video",(req,res)=>{
   VideoModel.find({},(err,data)=>{

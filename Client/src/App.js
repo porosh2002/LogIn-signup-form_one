@@ -4,8 +4,10 @@ import Footer from "./Footer";
 import { connect } from "react-redux";
 import Navigation from "./Components/Navigation/Navigation";
 import { selectCurrentUser } from "./Redux/user/user_selector";
+import {AccountMenu} from './Redux/AccountMenu/acc_selector'
 import { setAccountMenu } from "./Redux/AccountMenu/actions";
 import { setNotificationMenu } from "./Redux/NotificationMenu/actions";
+import { NotificationMenu} from "./Redux/NotificationMenu/nof_selector";
 const Home = React.lazy(() => import("./Pages/Home"));
 const Error = React.lazy(() => import("./Pages/Error"));
 const Login = React.lazy(() => import("./Pages/Login"));
@@ -13,8 +15,13 @@ const Signup = React.lazy(() => import("./Pages/Signup"));
 const Upload = React.lazy(() => import("./Pages/Upload"));
 class App extends Component {
 closenavigationmenu=()=>{
-  this.props.setAccountMenu(false)
-  this.props.NotificationMenu(false);
+  const {notification_menu,account_menu} = this.props;
+  if(notification_menu === true){
+    this.props.NotificationMenu(false);
+  }
+  if(account_menu === true){
+    this.props.setAccountMenu(false)
+  }
 }
   render() {
     const { userID } = this.props;
@@ -46,6 +53,8 @@ closenavigationmenu=()=>{
 const mapStateToProps = (state) => {
   return {
     userID: selectCurrentUser(state),
+    account_menu: AccountMenu(state),
+    notification_menu: NotificationMenu(state),
   };
 };
 const mapDispatchToProps = (dispatch) => {

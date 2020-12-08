@@ -23,7 +23,7 @@ export default function Dropjone({onChange}) {
             yourImage.map((upFile,i)=>{
                 return(
                     <div className='VideoDiv' key={i}>
-                    <img className='border-image-up' src={upFile.preview} width='300' />
+                    <img alt='Thumbnail Image' className='border-image-up' src={upFile.preview} width='300' />
                     </div>
                 )
             })
