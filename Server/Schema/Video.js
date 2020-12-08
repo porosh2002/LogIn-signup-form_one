@@ -16,6 +16,10 @@ const VideoSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    Thumbnail:{
+        type:Buffer,
+        required:true
+    }
 
 });
 const VideoModel = mongoose.model('Video', VideoSchema);

@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import DropZone from "../Components/Dropzone/Dropjone";
+import DropThumb from "../Components/Dropzone/DropThumb";
 import {URL} from '../serverUrl';
 import Error from '../Components/Error/Error'
 import axios from 'axios';
@@ -11,6 +12,7 @@ export class Upload extends PureComponent {
     Des: "",
     fileName:'',
     filePath:'',
+    Thumbnail:null,
     errorHappend:false
   };
   OnFileUpload = (e) => {
@@ -69,8 +71,12 @@ export class Upload extends PureComponent {
 </div>
 <DIVUPLOAD>
         <p className="title title-b">Upload Video</p>
-        <div style={{ margin: "100px 0px 50px 0px" }}>
+        <div style={{ margin: "20px 0px" }}>
           <DropZone onChange={this.OnFileUpload}/>
+        </div>
+        <p className="title title-b">Upload Thumbnail</p>
+        <div style={{ margin: "20px 0px" }}>
+          <DropThumb onChange={this.OnFileUpload}/>
         </div>
         <Input
           onChange={this.OnTextUpload}

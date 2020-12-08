@@ -67,6 +67,19 @@ transform:translate(-50%,-50%);
   background-color: #d2d2d2;
   outline: none;
 }
+.DropDivImage{
+  display:block;
+  margin:0px auto;
+  width:50vw;
+  padding:10px 0px;
+  background-color: #d2d2d2;
+  outline: none;
+  cursor: pointer;
+}
+.dropsignImage{
+font-size:16px;
+color: #444;
+}
 .dropsign{
 position: relative;
 top: 50%;
@@ -115,4 +128,8 @@ color: #f7f7f7;
 .LinkToAccount{
   font-size:18px;
   color: #317c34;
+}
+/* ! border-image-up */
+.border-image-up{
+  border-radius:3px;
 }
