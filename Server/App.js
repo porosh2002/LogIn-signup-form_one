@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-const path = require('path');
+const path = require("path");
 const helmet = require("helmet");
 const bcrypt = require("bcrypt");
 const md5 = require("md5");
@@ -12,15 +12,15 @@ const morgan = require("morgan");
 const multer = require("multer");
 const cors = require("cors");
 const RegisterUserModel = require("./Schema/Register");
-const VideoModel = require ('./Schema/Video');
-const ThumbModel = require ('./Schema/Thumb');
+const VideoModel = require("./Schema/Video");
+const ThumbModel = require("./Schema/Thumb");
 const Thumbnail = multer({
   limits: {
     fileSize: 1000000,
   },
   fileFilter(req, file, cb) {
     if (!file.originalname.match(/\.(jpg|png|JPG|PNG|JPEG|jpeg)$/))
-    return cb(new Error("This is not a correct format of the file"));
+      return cb(new Error("This is not a correct format of the file"));
     cb(undefined, true);
   },
 });
@@ -31,25 +31,29 @@ app.use(bodyParser.json());
 app.use(helmet());
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-      cb(null, 'uploads/')
+    cb(null, "uploads/");
   },
   filename: (req, file, cb) => {
-      cb(null, `${Date.now()}_${file.originalname}`)
+    cb(null, `${Date.now()}_${file.originalname}`);
   },
   fileFilter: (req, file, cb) => {
-      const ext = path.extname(file.originalname)
-      if (ext !== '.mp4') {
-          return cb(res.status(400).end('only jpg, png, mp4 is allowed'), false);
-      }
-      cb(null, true)
-  }
-})
-var upload = multer({ storage: storage }).single("file")
-app.post('/api/VideoData',(req,res)=>{
-  const {Title,Des,fileName,filePath,ThumbnailID} = req.body;
+    const ext = path.extname(file.originalname);
+    if (ext !== ".mp4") {
+      return cb(res.status(400).end("only jpg, png, mp4 is allowed"), false);
+    }
+    cb(null, true);
+  },
+});
+var upload = multer({ storage: storage }).single("file");
+app.post("/api/VideoData", (req, res) => {
+  const { Title, Des, fileName, filePath, ThumbnailID } = req.body;
   const VideoData = new VideoModel({
-    Title,Des,fileName,filePath,ThumbnailID
-  })
+    Title,
+    Des,
+    fileName,
+    filePath,
+    ThumbnailID,
+  });
   VideoData.save((err, noerr) => {
     if (err) {
       res.sendStatus(400);
@@ -59,15 +63,18 @@ app.post('/api/VideoData',(req,res)=>{
       res.sendStatus(200);
     }
   });
-})
-app.post('/api/Video', (req, res) => {
-  upload(req, res, err => {
-      if (err) {
-          return res.json({ success: false, err })
-      }
-      return res.json({ success: true, filePath: res.req.file.path, fileName: res.req.file.filename })
-  })
-
+});
+app.post("/api/Video", (req, res) => {
+  upload(req, res, (err) => {
+    if (err) {
+      return res.json({ success: false, err });
+    }
+    return res.json({
+      success: true,
+      filePath: res.req.file.path,
+      fileName: res.req.file.filename,
+    });
+  });
 });
 app.post("/api/login", (req, res) => {
   const { email, password } = req.body;
@@ -103,7 +110,7 @@ app.post("/api/register", (req, res) => {
     });
   });
 });
-app.post('/api/Thumb/:id', Thumbnail.single("Thumbnail"),(req,res)=>{
+app.post("/api/Thumb/:id", Thumbnail.single("Thumbnail"), (req, res) => {
   const Thumbnail = req.file.buffer;
   const ThumbnailID = req.params.id;
   const Thumb = new ThumbModel({
@@ -119,18 +126,18 @@ app.post('/api/Thumb/:id', Thumbnail.single("Thumbnail"),(req,res)=>{
       res.sendStatus(200);
     }
   });
-})
+});
 //
-app.get("/api/video",(req,res)=>{
-  VideoModel.find({},(err,data)=>{
-    if(err){
+app.get("/api/video", (req, res) => {
+  VideoModel.find({}, (err, data) => {
+    if (err) {
       console.log(err);
     }
-    if(data){
-      res.json(data)
+    if (data) {
+      res.json(data);
     }
-  })
-})
+  });
+});
 app.listen(process.env.DB_PORT, async () => {
   try {
     await mongoose.connect("mongodb://localhost:27017/BoilerPlate_DB", {

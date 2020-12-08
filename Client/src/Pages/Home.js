@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import { URL } from "../serverUrl";
+import Video  from '../Components/Video.js/Video'
 export class Home extends PureComponent {
   componentDidMount() {
     fetch(`${URL}api/video`, {
@@ -14,7 +15,7 @@ export class Home extends PureComponent {
   render() {
       const {video} = this.state;
     return <div>
-       
+       {video.length !==0 ? (<Video video={video}/>):null}
     </div>;
   }
 }
