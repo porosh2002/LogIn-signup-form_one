@@ -1,9 +1,11 @@
 import React from 'react'
-
-export default function Video(props) {
+import VideoThumb from './videoThumb'
+export default function Video({video}) {
     return (
         <div>
-            Video 
+            {video.map((data,i)=>{
+                return <VideoThumb VideoData={data} key={i} />
+            })}
         </div>
     )
 }

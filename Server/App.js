@@ -138,6 +138,16 @@ app.get("/api/video", (req, res) => {
     }
   });
 });
+app.get("/api/thumbnail/:id", (req, res) => {
+  ThumbModel.find({ ThumbnailID: req.params.id }, function (err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.set("Content-Type", "image/jpeg");
+      res.send(result[0].Thumbnail);
+    }
+  });
+});
 app.listen(process.env.DB_PORT, async () => {
   try {
     await mongoose.connect("mongodb://localhost:27017/BoilerPlate_DB", {
