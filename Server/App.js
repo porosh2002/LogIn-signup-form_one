@@ -159,7 +159,7 @@ app.get("/api/thumbnail/:id", (req, res) => {
   });
 });
 app.get("/uploads/:id",(req,res)=>{
-
+res.sendFile(__dirname + '/uploads/' + req.params.id)
 })
 app.listen(process.env.DB_PORT, async () => {
   try {
