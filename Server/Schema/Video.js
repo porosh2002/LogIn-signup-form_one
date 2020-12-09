@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const VideoSchema = new mongoose.Schema({
     filePath:{
-        type:Buffer,
+        type:String,
         required:true,
     },
     fileName:{

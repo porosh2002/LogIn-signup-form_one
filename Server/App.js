@@ -138,6 +138,16 @@ app.get("/api/video", (req, res) => {
     }
   });
 });
+app.get("/api/video/:id", (req, res) => {
+  VideoModel.find({_id:req.params.id}, (err, data) => {
+    if (err) {
+      console.log(err);
+    }
+    if (data) {
+      res.json(data);
+    }
+  });
+});
 app.get("/api/thumbnail/:id", (req, res) => {
   ThumbModel.find({ ThumbnailID: req.params.id }, function (err, result) {
     if (err) {
@@ -148,6 +158,9 @@ app.get("/api/thumbnail/:id", (req, res) => {
     }
   });
 });
+app.get("/uploads/:id",(req,res)=>{
+
+})
 app.listen(process.env.DB_PORT, async () => {
   try {
     await mongoose.connect("mongodb://localhost:27017/BoilerPlate_DB", {
