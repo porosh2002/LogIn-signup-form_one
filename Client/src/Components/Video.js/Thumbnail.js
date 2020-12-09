@@ -15,7 +15,7 @@ export class Thumbnail extends PureComponent {
     render() {
         const {imageURl} = this.state;
         return (
-<img src={imageURl} alt='poster' />
+<img className='thumbImage' src={imageURl} alt='poster' />
         )
     }
 }

@@ -11,6 +11,7 @@ import { NotificationMenu} from "./Redux/NotificationMenu/nof_selector";
 const Home = React.lazy(() => import("./Pages/Home"));
 const Error = React.lazy(() => import("./Pages/Error"));
 const Login = React.lazy(() => import("./Pages/Login"));
+const SingleVideo = React.lazy(() => import("./Pages/SingleVideo"));
 const Signup = React.lazy(() => import("./Pages/Signup"));
 const Upload = React.lazy(() => import("./Pages/Upload"));
 class App extends Component {
@@ -41,6 +42,7 @@ closenavigationmenu=()=>{
               />
               <Route exact path="/signup" component={Signup} />
               <Route exact path="/upload" component={Upload} />
+              <Route exact path="/video/:id" component={SingleVideo} />
               <Route component={Error} />
           </Switch>
             </div>

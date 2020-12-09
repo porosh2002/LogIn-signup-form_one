@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React,{useState} from 'react'
 import {useDropzone} from 'react-dropzone';
 export default function Dropjone({onChange}) {

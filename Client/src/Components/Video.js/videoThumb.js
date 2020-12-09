@@ -1,10 +1,13 @@
 import React from 'react'
-import Thumbnail from './Thumbnail'
+import Thumbnail from './Thumbnail';
+import {Link} from 'react-router-dom'
 export default function videoThumb({VideoData}) {
-    const {ThumbnailID,Title} = VideoData;
+    const {ThumbnailID,Title,_id} = VideoData;
+    console.log(VideoData);
     return (
-        <div>
+        <Link className='thumbLink' to={`/video/${_id}`}>
             <Thumbnail ThumbnailID={ThumbnailID} />
-        </div>
+            <p>{Title}</p>
+        </Link>
     )
 }
