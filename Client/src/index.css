@@ -154,3 +154,20 @@ color: #f7f7f7;
 transform: scale(1.009);
 transition:.5s;
 }
+/* !  videoPlayer  */
+.videoPlayer{
+  height:500px;
+  width:600px;
+  margin:50px;
+}
+video{
+  border-radius:5px;
+}
+.videoTitle{
+  font-size:20px;
+  margin:10px;
+}
+.videoDes{
+  font-size:17px;
+  margin:10px;
+}
