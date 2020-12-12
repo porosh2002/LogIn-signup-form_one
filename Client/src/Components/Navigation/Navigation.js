@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import Logo from "../../Images/logo.png";
 import { IconWrap } from "../../Styled";
+import {URL} from '../../serverUrl' 
 import Search from "../Search/Search";
 import { Link } from "react-router-dom";
 import { selectCurrentUser } from "../../Redux/user/user_selector";
@@ -14,7 +15,21 @@ class Navigation extends PureComponent {
   state = {
     navOpen: this.props.notification_menu,
     AccOpen: this.props.account_menu,
+    name:null
   };
+  componentDidMount() {
+    const {userID} = this.props;
+    if(userID !== undefined){
+      fetch(`${URL}api/getname`,{
+        method:"post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id:userID,
+        }),
+      }).then(res=>res.json()).then(newRes=>this.setState({name:newRes}))
+    }
+  }
+  
   componentDidUpdate() {
     if (this.props.notification_menu !== this.state.notification_menu) {
       this.setState({ navOpen: this.props.notification_menu });
@@ -67,7 +82,7 @@ class Navigation extends PureComponent {
           <p className="NotificationMessage">no navigation</p>
         </div>
         <div style={AccStyle} className="NotificationDiv">
-          <div className="NotificationMessage">{userID !== undefined ? (<p>{userID}</p>):(<Link style={{fontSize:"20px",color:"#f7f7f7",textDecoration:"none",padding:"07px 15px",border:"1px solid #fff",borderRadius:"3px"}} to='/login'>Login now</Link>)}</div>
+          <div style={{width:"90%",textAlign:"center"}} className="NotificationMessage">{userID !== undefined ? (<div><p>{this.state.name}</p><p>{userID}</p></div>):(<Link style={{fontSize:"20px",color:"#f7f7f7",textDecoration:"none",padding:"07px 15px",border:"1px solid #fff",borderRadius:"3px"}} to='/login'>Login now</Link>)}</div>
         </div>
       </div>
     );

@@ -158,6 +158,17 @@ app.get("/api/thumbnail/:id", (req, res) => {
     }
   });
 });
+app.post("/api/getname",(req,res)=>{
+  RegisterUserModel.findOne({ email: md5(req.body.id) }, (error, result) => {
+if(result){
+  res.json(result.name)
+}
+else{
+res.status(400)
+}
+  });
+})
+
 app.get("/uploads/:id",(req,res)=>{
 res.sendFile(__dirname + '/uploads/' + req.params.id)
 })
