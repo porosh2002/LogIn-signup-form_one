@@ -1,5 +1,7 @@
 import React, { Component, Suspense } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route,
+  //  Redirect 
+  } from "react-router-dom";
 import Footer from "./Footer";
 import { connect } from "react-redux";
 import Navigation from "./Components/Navigation/Navigation";
@@ -25,7 +27,7 @@ closenavigationmenu=()=>{
   }
 }
   render() {
-    const { userID } = this.props;
+    // const { userID } = this.props;
     return (
       <div>
         <Navigation />
@@ -36,9 +38,10 @@ closenavigationmenu=()=>{
               <Route
                 exact
                 path="/login"
-                render={() =>
-                  userID === false ? <Login /> : <Redirect to="/" />
-                }
+                component={Login}
+                // render={() =>
+                //   userID === false ? <Login /> : <Redirect to="/" />
+                // }
               />
               <Route exact path="/signup" component={Signup} />
               <Route exact path="/upload" component={Upload} />

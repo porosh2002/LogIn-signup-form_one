@@ -171,3 +171,31 @@ video{
   font-size:17px;
   margin:10px;
 }
+/* ! */
+.UpDownVote{
+  display:flex;
+  margin:0px 50px;
+}
+.UpDownVote div{
+  width:50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding:10px 0px;
+  font-size:26px;
+  color: #317c34;
+  background-color:#cfcfcf;
+  border-radius:3px;
+  margin:0px 10px;
+  border:1px solid transparent;
+}
+.UpDownVote div:hover{
+background-color:#317c34;
+color: #f7f7f7;
+}
+.UpDownVote div:active{
+  background-color: #f7f7f7;
+  border:1px solid royalblue;
+color: royalblue;
+}

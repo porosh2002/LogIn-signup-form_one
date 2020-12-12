@@ -3,6 +3,7 @@ import Logo from "../../Images/logo.png";
 import { IconWrap } from "../../Styled";
 import Search from "../Search/Search";
 import { Link } from "react-router-dom";
+import { selectCurrentUser } from "../../Redux/user/user_selector";
 import { AccountMenu } from "../../Redux/AccountMenu/acc_selector";
 import { setAccountMenu } from "../../Redux/AccountMenu/actions";
 import { setNotificationMenu } from "../../Redux/NotificationMenu/actions";
@@ -41,7 +42,8 @@ class Navigation extends PureComponent {
     }
   };
   render() {
-    const { navOpen, AccOpen } = this.state;
+    const { navOpen, AccOpen} = this.state;
+    const { userID } = this.props;
     const NavStyle = navOpen ? null : { display: "none" };
     const AccStyle = AccOpen ? null : { display: "none" };
     return (
@@ -65,7 +67,7 @@ class Navigation extends PureComponent {
           <p className="NotificationMessage">no navigation</p>
         </div>
         <div style={AccStyle} className="NotificationDiv">
-          <p className="NotificationMessage">Account details</p>
+          <div className="NotificationMessage">{userID !== undefined ? (<p>{userID}</p>):(<Link style={{fontSize:"20px",color:"#f7f7f7",textDecoration:"none",padding:"07px 15px",border:"1px solid #fff",borderRadius:"3px"}} to='/login'>Login now</Link>)}</div>
         </div>
       </div>
     );
@@ -73,6 +75,7 @@ class Navigation extends PureComponent {
 }
 const mapStateToProps = (state) => {
   return {
+    userID: selectCurrentUser(state),
     account_menu: AccountMenu(state),
     notification_menu: NotificationMenu(state),
   };
