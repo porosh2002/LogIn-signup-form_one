@@ -82,7 +82,9 @@ class Navigation extends PureComponent {
           <p className="NotificationMessage">no navigation</p>
         </div>
         <div style={AccStyle} className="NotificationDiv">
-          <div style={{width:"90%",textAlign:"center"}} className="NotificationMessage">{userID !== undefined ? (<div><p>{this.state.name}</p><p>{userID}</p></div>):(<Link style={{fontSize:"20px",color:"#f7f7f7",textDecoration:"none",padding:"07px 15px",border:"1px solid #fff",borderRadius:"3px"}} to='/login'>Login now</Link>)}</div>
+          <div style={{width:"90%",textAlign:"center"}} className="NotificationMessage">{userID !== undefined ? (<div><p style={{fontSize:"17px"}}>{this.state.name}</p><p style={{marginBottom:"10px"}}>{userID}</p><div>
+          <Link style={{fontSize:"20px",color:"#f7f7f7",textDecoration:"none",padding:"07px 15px",border:"1px solid #fff",borderRadius:"3px"}} to='/login'>Logout</Link>
+          </div></div>):(<Link style={{fontSize:"20px",color:"#f7f7f7",textDecoration:"none",padding:"07px 15px",border:"1px solid #fff",borderRadius:"3px"}} to='/login'>Login now</Link>)}</div>
         </div>
       </div>
     );
