@@ -26,7 +26,7 @@ const Thumbnail = multer({
 });
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(morgan('combined'))
+// app.use(morgan('combined'))
 app.use(bodyParser.json());
 app.use(helmet());
 const storage = multer.diskStorage({
@@ -173,7 +173,24 @@ res.status(400)
 }
   });
 })
-
+app.post('/api/viewsUpdate/:id', (req, response) => {
+  if (req.params.id) {
+    VideoModel.findOne({ _id: req.params.id }, (err, data) => {
+      const newViews = Number(data.Views) + 1;
+      VideoModel.updateOne({ _id: req.params.id }, { Views: newViews }, (err,res) => {
+        if (err) {
+          console.log(err);
+        }
+        else {
+          response.sendStatus(200)
+        }
+      })
+    })
+  }
+  else {
+    res.sendStatus(400)
+  }
+})
 app.get("/uploads/:id",(req,res)=>{
 res.sendFile(__dirname + '/uploads/' + req.params.id)
 })
