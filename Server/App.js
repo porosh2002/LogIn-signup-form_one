@@ -14,6 +14,7 @@ const cors = require("cors");
 const RegisterUserModel = require("./Schema/Register");
 const VideoModel = require("./Schema/Video");
 const ThumbModel = require("./Schema/Thumb");
+const ActivityModel = require("./Schema/likeUnlike")
 const Thumbnail = multer({
   limits: {
     fileSize: 1000000,
@@ -201,6 +202,8 @@ app.post("/api/viewsUpdate/:id", (req, response) => {
   }
 });
 app.post("/api/LikeUpdate/:id", (req, response) => {
+  const { userID } = req.body;
+  console.log(req);
   if (req.params.id) {
     VideoModel.findOne({ _id: req.params.id }, (err, data) => {
       const newLikes = Number(data.Likes) + 1;
@@ -211,7 +214,38 @@ app.post("/api/LikeUpdate/:id", (req, response) => {
           if (err) {
             console.log(err);
           } else {
-            response.json(newLikes);
+            ActivityModel.findOne({ userID: req.body.userID }, (err, data) => {
+              if (err) {
+                console.log(err);
+              }
+              if (data === null) {
+                const Activity = new ActivityModel({
+                  Liked: true,
+                  UnLiked: false,
+                  userID: req.body.userID,
+                  ContentID: req.params.id
+                });
+                Activity.save((err, noerr) => {
+                  if (err) {
+                    console.log(err);
+                  }
+                  if (noerr) {
+
+                  }
+                });
+              }
+              if (data !== null) {
+                ActivityModel.updateOne({ userID: req.body.userID }, { Liked: true }, (err, res) => {
+                  if (err) {
+                    console.log(err);
+                  }
+                  else {
+                    response.json(newLikes);
+                  }
+                })
+              }
+            })
+            // 
           }
         }
       );
@@ -231,7 +265,46 @@ app.post("/api/UNLikeUpdate/:id", (req, response) => {
           if (err) {
             console.log(err);
           } else {
-            response.json(newUnLikes);
+
+
+
+
+            ActivityModel.findOne({ userID: req.body.userID }, (err, data) => {
+              if (err) {
+                console.log(err);
+              }
+              if (data === null) {
+                const Activity = new ActivityModel({
+                  Liked: false,
+                  UnLiked: true,
+                  userID: req.body.userID,
+                  ContentID: req.params.id
+                });
+                Activity.save((err, noerr) => {
+                  if (err) {
+                    console.log(err);
+                  }
+                  if (noerr) {
+
+                  }
+                });
+              }
+              if (data !== null) {
+                ActivityModel.updateOne({ userID: req.body.userID }, { UnLiked: true }, (err, res) => {
+                  if (err) {
+                    console.log(err);
+                  }
+                  else {
+                    response.json(newUnLikes);
+                  }
+                })
+              }
+            })
+
+
+
+
+
           }
         }
       );
