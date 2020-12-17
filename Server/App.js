@@ -46,7 +46,15 @@ const storage = multer.diskStorage({
 });
 var upload = multer({ storage: storage }).single("file");
 app.post("/api/VideoData", (req, res) => {
-  const { Title, Des, fileName, filePath, ThumbnailID,UploaderName,UploadDetails} = req.body;
+  const {
+    Title,
+    Des,
+    fileName,
+    filePath,
+    ThumbnailID,
+    UploaderName,
+    UploadDetails,
+  } = req.body;
   const VideoData = new VideoModel({
     Title,
     Des,
@@ -55,9 +63,9 @@ app.post("/api/VideoData", (req, res) => {
     ThumbnailID,
     UploaderName,
     UploadDetails,
-    Views:0,
-    Likes:0,
-    UnLike:0
+    Views: 0,
+    Likes: 0,
+    UnLike: 0,
   });
   VideoData.save((err, noerr) => {
     if (err) {
@@ -144,7 +152,7 @@ app.get("/api/video", (req, res) => {
   });
 });
 app.get("/api/video/:id", (req, res) => {
-  VideoModel.find({_id:req.params.id}, (err, data) => {
+  VideoModel.find({ _id: req.params.id }, (err, data) => {
     if (err) {
       console.log(err);
     }
@@ -163,37 +171,78 @@ app.get("/api/thumbnail/:id", (req, res) => {
     }
   });
 });
-app.post("/api/getname",(req,res)=>{
+app.post("/api/getname", (req, res) => {
   RegisterUserModel.findOne({ email: md5(req.body.id) }, (error, result) => {
-if(result){
-  res.json(result.name)
-}
-else{
-res.status(400)
-}
+    if (result) {
+      res.json(result.name);
+    } else {
+      res.status(400);
+    }
   });
-})
-app.post('/api/viewsUpdate/:id', (req, response) => {
+});
+app.post("/api/viewsUpdate/:id", (req, response) => {
   if (req.params.id) {
     VideoModel.findOne({ _id: req.params.id }, (err, data) => {
       const newViews = Number(data.Views) + 1;
-      VideoModel.updateOne({ _id: req.params.id }, { Views: newViews }, (err,res) => {
-        if (err) {
-          console.log(err);
+      VideoModel.updateOne(
+        { _id: req.params.id },
+        { Views: newViews },
+        (err, res) => {
+          if (err) {
+            console.log(err);
+          } else {
+            response.sendStatus(200);
+          }
         }
-        else {
-          response.sendStatus(200)
+      );
+    });
+  } else {
+    res.sendStatus(400);
+  }
+});
+app.post("/api/LikeUpdate/:id", (req, response) => {
+  if (req.params.id) {
+    VideoModel.findOne({ _id: req.params.id }, (err, data) => {
+      const newLikes = Number(data.Likes) + 1;
+      VideoModel.updateOne(
+        { _id: req.params.id },
+        { Likes: newLikes },
+        (err, res) => {
+          if (err) {
+            console.log(err);
+          } else {
+            response.json(newLikes);
+          }
         }
-      })
-    })
+      );
+    });
+  } else {
+    res.sendStatus(400);
   }
-  else {
-    res.sendStatus(400)
+});
+app.post("/api/UNLikeUpdate/:id", (req, response) => {
+  if (req.params.id) {
+    VideoModel.findOne({ _id: req.params.id }, (err, data) => {
+      const newUnLikes = Number(data.UnLike) + 1;
+      VideoModel.updateOne(
+        { _id: req.params.id },
+        { UnLike: newUnLikes },
+        (err, res) => {
+          if (err) {
+            console.log(err);
+          } else {
+            response.json(newUnLikes);
+          }
+        }
+      );
+    });
+  } else {
+    res.sendStatus(400);
   }
-})
-app.get("/uploads/:id",(req,res)=>{
-res.sendFile(__dirname + '/uploads/' + req.params.id)
-})
+});
+app.get("/uploads/:id", (req, res) => {
+  res.sendFile(__dirname + "/uploads/" + req.params.id);
+});
 app.listen(process.env.DB_PORT, async () => {
   try {
     await mongoose.connect("mongodb://localhost:27017/BoilerPlate_DB", {

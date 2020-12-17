@@ -8,23 +8,30 @@ export class Home extends PureComponent {
       method: "get",
     })
       .then((res) => res.json())
-      .then((res) => this.setState({ video: res[0] })).then(() => setTimeout(() => {
+      .then((res) => this.setState({ video: res[0],Likes:res[0].Likes,DisLikes:res[0].UnLike })).then(() => setTimeout(() => {
         fetch(`${URL}api/viewsUpdate/${this.state.video._id}`, {
           method: "post",
         })
-      },1000))
+      },15000))
   }
   state = {
     video: [],
+    Likes: null,
+    DisLikes:null
   };
   LikeAdded = () => {
-    console.log('like');
+    fetch(`${URL}api/LikeUpdate/${this.state.video._id}`, {
+      method: "post",
+    }).then(res=>res.json()).then(res=>this.setState({Likes:res}))
   }
   UnlikeAdded = () => {
-   console.log('un-like'); 
+    fetch(`${URL}api/UNLikeUpdate/${this.state.video._id}`, {
+      method: "post",
+    }).then(res=>res.json()).then(res=>this.setState({DisLikes:res}))
   }
   render() {
-    const { Title, Des, filePath, UploaderName, UploadDetails, Likes, Views, UnLike } = this.state.video;
+    const { Title, Des, filePath, UploaderName, UploadDetails, Views } = this.state.video;
+    const { Likes, DisLikes } = this.state;
     return <div>
       <div className='videoPlayer'>
         <video poster={poster} style={{ width: '100%' }} src={`${URL}${filePath}`} controls ></video>
@@ -45,7 +52,7 @@ export class Home extends PureComponent {
         <div style={{ height: "30px" }}></div>
         <div className='UpDownVote'>
           <div onClick={this.LikeAdded}><p style={{ fontSize: "15px", marginRight: "10px" }}>{Likes}</p><ImHeart /></div>
-          <div onClick={this.UnlikeAdded}><p style={{ fontSize: "15px", marginRight: "10px" }}>{UnLike}</p><ImHeartBroken /></div>
+          <div onClick={this.UnlikeAdded}><p style={{ fontSize: "15px", marginRight: "10px" }}>{DisLikes}</p><ImHeartBroken /></div>
         </div>
       </div>
     </div>;
