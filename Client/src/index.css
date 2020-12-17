@@ -143,10 +143,10 @@ color: #f7f7f7;
   text-decoration: none;
   font-size:16px;
   color: #343a40;
-  width:300px;
+  width:280px;
   height:250px;
   display: inline-block;
-  margin:30px;
+  margin:30px 15px;
   font-weight: 600;
   transition:.5s;
 }

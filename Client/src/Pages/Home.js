@@ -18,9 +18,7 @@ export class Home extends PureComponent {
        {video.length !==0 ? (<Video video={video}/>):null}
        <h2 style={{margin:"50px 0px 20px 30px",letterSpacing:"1px",color:"#29303b"}}>Most viewed videos</h2>
        {video.length !==0 ? (<Video video={video}/>):null}
-       <h2 style={{margin:"50px 0px 20px 30px",letterSpacing:"1px",color:"#29303b"}}>Last weak Top Videos</h2>
-       {video.length !==0 ? (<Video video={video}/>):null}
-       <h2 style={{margin:"50px 0px 20px 30px",letterSpacing:"1px",color:"#29303b"}}>All Time Popular Video</h2>
+       <h2 style={{margin:"50px 0px 20px 30px",letterSpacing:"1px",color:"#29303b"}}>All Videos</h2>
        {video.length !==0 ? (<Video video={video}/>):null}
     </div>;
   }
