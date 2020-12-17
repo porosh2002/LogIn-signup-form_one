@@ -23,7 +23,7 @@ export class Upload extends PureComponent {
     UploadDetails:null
   };
   OnFileUpload = (e) => {
-    this.setState({UploadDetails:moment().format('MMMM Do YYYY, h:mm:ss a')})
+    this.setState({UploadDetails:moment().format('MMMM Do YYYY')})
     this.setState({ Video: e[0] });
     const formData = new FormData();
     formData.append("file", this.state.Video);

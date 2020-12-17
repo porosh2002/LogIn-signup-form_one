@@ -17,7 +17,7 @@ export class Home extends PureComponent {
     const { Title, Des, filePath,UploaderName,UploadDetails} = this.state.video;
     return<div>
     <div className='videoPlayer'>
-    <video poster={poster} style={{ width: '100%' }} src={`${URL}${filePath}`} controls></video>
+        <video  poster={poster} style={{ width: '100%' }} src={`${URL}${filePath}`} controls autoPlay></video>
         <div className='videoDetails'>
         <p>{UploadDetails}</p>
         <p>Video uploaded by : {UploaderName}</p>
