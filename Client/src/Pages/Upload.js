@@ -19,11 +19,11 @@ export class Upload extends PureComponent {
     filePath: "",
     Thumbnail: "",
     errorHappend: false,
-    UploaderName:"unknown",
-    UploadDetails:null
+    UploaderName: "unknown",
+    UploadDetails: null
   };
   OnFileUpload = (e) => {
-    this.setState({UploadDetails:moment().format('MMMM Do YYYY')})
+    this.setState({ UploadDetails: moment().format('MMMM Do YYYY') })
     this.setState({ Video: e[0] });
     const formData = new FormData();
     formData.append("file", this.state.Video);
@@ -50,7 +50,7 @@ export class Upload extends PureComponent {
     this.setState({ [name]: value });
   };
   UploadFile = (e) => {
-    const { Title, Des, fileName, filePath, Thumbnail,UploaderName,UploadDetails } = this.state;
+    const { Title, Des, fileName, filePath, Thumbnail, UploaderName, UploadDetails } = this.state;
 
     if (
       Title.length !== 0 &&
@@ -122,8 +122,8 @@ export class Upload extends PureComponent {
             type="text"
             placeholder="Enter Your Video Title"
           />
-            <Input
-            onChange={(e)=>{this.setState({UploaderName:e.target.value})}}
+          <Input
+            onChange={(e) => { this.setState({ UploaderName: e.target.value }) }}
             placeholder="Enter video uploader name"
             style={{ width: "700px" }}
           />

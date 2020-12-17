@@ -27,6 +27,18 @@ const VideoSchema = new mongoose.Schema({
     UploadDetails:{
         type:String,
         required:true
+    },
+    Views:{
+        type:String,
+        required:true
+    },
+    Likes:{
+        type:String,
+        required:true
+    },
+    UnLike:{
+        type:String,
+        required:true
     }
 
 });

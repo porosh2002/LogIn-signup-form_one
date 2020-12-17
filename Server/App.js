@@ -54,7 +54,10 @@ app.post("/api/VideoData", (req, res) => {
     filePath,
     ThumbnailID,
     UploaderName,
-    UploadDetails
+    UploadDetails,
+    Views:0,
+    Likes:0,
+    UnLike:0
   });
   VideoData.save((err, noerr) => {
     if (err) {
