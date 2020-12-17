@@ -3,7 +3,8 @@ import { URL } from "../serverUrl";
 import poster from "../Images/poster.jpg";
 import { connect } from "react-redux";
 import { selectCurrentUser } from "../Redux/user/user_selector";
-import { ImHeartBroken, ImHeart } from "react-icons/im";
+import { ImHeart} from "react-icons/im";
+import { AiFillApi} from "react-icons/ai";
 class Home extends PureComponent {
   componentDidMount() {
     fetch(`${URL}api/video/${this.props.match.params.id}`, {
@@ -29,6 +30,8 @@ class Home extends PureComponent {
     video: [],
     Likes: null,
     DisLikes: null,
+    liked:false,
+    Unliked:false
   };
   LikeAdded = () => {
     const { userID } = this.props;
@@ -63,7 +66,9 @@ class Home extends PureComponent {
       UploadDetails,
       Views,
     } = this.state.video;
-    const { Likes, DisLikes } = this.state;
+    const { Likes, DisLikes, liked, Unliked } = this.state;
+    const styleLiked = liked ? ({backgroundColor:"#ff4500",color:"#f7f7f7"}) :null
+    const styleUNLiked = Unliked ? ({backgroundColor:"#ff4500",color:"#f7f7f7"}) :null
     return (
       <div>
         <div className="videoPlayer">
@@ -71,7 +76,7 @@ class Home extends PureComponent {
             poster={poster}
             style={{ width: "100%" }}
             src={`${URL}${filePath}`}
-            controls autoPlay
+            controls 
           ></video>
           <div className="videoDetails">
             <p>{UploadDetails}</p>
@@ -109,15 +114,15 @@ class Home extends PureComponent {
           <p className="videoDes">{Des}</p>
           <div style={{ height: "30px" }}></div>
           <div className="UpDownVote">
-            <div onClick={this.LikeAdded}>
+            <div style={styleLiked} onClick={this.LikeAdded}>
               <p style={{ fontSize: "15px", marginRight: "10px" }}>{Likes}</p>
               <ImHeart />
             </div>
-            <div onClick={this.UnlikeAdded}>
+            <div style={styleUNLiked} onClick={this.UnlikeAdded}>
               <p style={{ fontSize: "15px", marginRight: "10px" }}>
                 {DisLikes}
               </p>
-              <ImHeartBroken />
+              <AiFillApi />
             </div>
           </div>
         </div>
