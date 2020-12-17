@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import DropZone from "../Components/Dropzone/Dropjone";
 import DropThumb from "../Components/Dropzone/DropThumb";
 import { URL } from "../serverUrl";
+import moment from 'moment';
 import { v4 as uuidv4 } from "uuid";
 import Error from "../Components/Error/Error";
 import axios from "axios";
@@ -18,8 +19,11 @@ export class Upload extends PureComponent {
     filePath: "",
     Thumbnail: "",
     errorHappend: false,
+    UploaderName:"unknown",
+    UploadDetails:null
   };
   OnFileUpload = (e) => {
+    this.setState({UploadDetails:moment().format('MMMM Do YYYY, h:mm:ss a')})
     this.setState({ Video: e[0] });
     const formData = new FormData();
     formData.append("file", this.state.Video);
@@ -46,7 +50,7 @@ export class Upload extends PureComponent {
     this.setState({ [name]: value });
   };
   UploadFile = (e) => {
-    const { Title, Des, fileName, filePath, Thumbnail } = this.state;
+    const { Title, Des, fileName, filePath, Thumbnail,UploaderName,UploadDetails } = this.state;
 
     if (
       Title.length !== 0 &&
@@ -65,6 +69,8 @@ export class Upload extends PureComponent {
           fileName,
           filePath,
           ThumbnailID,
+          UploaderName,
+          UploadDetails
         }),
       }).then((res) => {
         if (res.status === 200) {
@@ -115,6 +121,11 @@ export class Upload extends PureComponent {
             name="Des"
             type="text"
             placeholder="Enter Your Video Title"
+          />
+            <Input
+            onChange={(e)=>{this.setState({UploaderName:e.target.value})}}
+            placeholder="Enter video uploader name"
+            style={{ width: "700px" }}
           />
           <Button onClick={this.UploadFile} type="submit" />
         </DIVUPLOAD>

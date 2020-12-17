@@ -19,6 +19,14 @@ const VideoSchema = new mongoose.Schema({
     ThumbnailID:{
         type:String,
         required:true
+    },
+    UploaderName: {
+        type:String,
+        required:true
+    },
+    UploadDetails:{
+        type:String,
+        required:true
     }
 
 });

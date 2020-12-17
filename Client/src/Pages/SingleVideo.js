@@ -14,10 +14,14 @@ export class Home extends PureComponent {
     video:[],
   };
   render() {
-      const {Title,Des,filePath} = this.state.video;
+    const { Title, Des, filePath,UploaderName,UploadDetails} = this.state.video;
     return<div>
     <div className='videoPlayer'>
     <video poster={poster} style={{ width: '100%' }} src={`${URL}${filePath}`} controls></video>
+        <div className='videoDetails'>
+        <p>{UploadDetails}</p>
+        <p>Video uploaded by : {UploaderName}</p>
+</div>
     <p className='videoTitle'>{Title}</p>
     <p className='videoDes'>{Des}</p>
     <div style={{height:"30px"}}></div>

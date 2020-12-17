@@ -26,7 +26,7 @@ const Thumbnail = multer({
 });
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(morgan('combined'))
+app.use(morgan('combined'))
 app.use(bodyParser.json());
 app.use(helmet());
 const storage = multer.diskStorage({
@@ -46,13 +46,15 @@ const storage = multer.diskStorage({
 });
 var upload = multer({ storage: storage }).single("file");
 app.post("/api/VideoData", (req, res) => {
-  const { Title, Des, fileName, filePath, ThumbnailID } = req.body;
+  const { Title, Des, fileName, filePath, ThumbnailID,UploaderName,UploadDetails} = req.body;
   const VideoData = new VideoModel({
     Title,
     Des,
     fileName,
     filePath,
     ThumbnailID,
+    UploaderName,
+    UploadDetails
   });
   VideoData.save((err, noerr) => {
     if (err) {

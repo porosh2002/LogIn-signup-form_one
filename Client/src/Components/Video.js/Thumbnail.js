@@ -6,7 +6,7 @@ export class Thumbnail extends PureComponent {
     componentDidMount() {
         const {ThumbnailID} = this.props;
         fetch(`${URL}api/thumbnail/${ThumbnailID}`).then(res=>{
-            this.setState({imageURl:res.url})
+        this.setState({imageURl:res.url})
         })
     }
     state={

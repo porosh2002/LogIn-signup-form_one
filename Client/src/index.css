@@ -156,9 +156,19 @@ transition:.5s;
 }
 /* !  videoPlayer  */
 .videoPlayer{
-  height:500px;
+  height:700px;
   width:600px;
   margin:50px;
+}
+.videoDetails{
+  display:flex;
+  font-weight: 600;
+  letter-spacing:1px;
+  justify-content:space-between;
+}
+.videoDetails p{
+  margin:10px 10px;
+  color: #317c34;
 }
 video{
   border-radius:5px;
@@ -166,10 +176,12 @@ video{
 .videoTitle{
   font-size:20px;
   margin:10px;
+  color: #343a40;
 }
 .videoDes{
   font-size:17px;
   margin:10px;
+  color: #343a40;
 }
 /* ! */
 .UpDownVote{
@@ -195,7 +207,5 @@ background-color:#317c34;
 color: #f7f7f7;
 }
 .UpDownVote div:active{
-  background-color: #f7f7f7;
-  border:1px solid royalblue;
-color: royalblue;
+  background-color:#317c33be;
 }
