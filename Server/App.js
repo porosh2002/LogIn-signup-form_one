@@ -203,7 +203,6 @@ app.post("/api/viewsUpdate/:id", (req, response) => {
 });
 app.post("/api/LikeUpdate/:id", (req, response) => {
   const { userID } = req.body;
-  console.log(req);
   if (req.params.id) {
     VideoModel.findOne({ _id: req.params.id }, (err, data) => {
       const newLikes = Number(data.Likes) + 1;
@@ -214,7 +213,7 @@ app.post("/api/LikeUpdate/:id", (req, response) => {
           if (err) {
             console.log(err);
           } else {
-            ActivityModel.findOne({ userID: req.body.userID }, (err, data) => {
+            ActivityModel.findOne({ userID: req.body.userID,ContentID: req.params.id}, (err, data) => {
               if (err) {
                 console.log(err);
               }
@@ -235,7 +234,7 @@ app.post("/api/LikeUpdate/:id", (req, response) => {
                 });
               }
               if (data !== null) {
-                ActivityModel.updateOne({ userID: req.body.userID }, { Liked: true }, (err, res) => {
+                ActivityModel.updateOne({ userID: req.body.userID , ContentID: req.params.id }, { Liked: true }, (err, res) => {
                   if (err) {
                     console.log(err);
                   }
@@ -269,7 +268,7 @@ app.post("/api/UNLikeUpdate/:id", (req, response) => {
 
 
 
-            ActivityModel.findOne({ userID: req.body.userID }, (err, data) => {
+            ActivityModel.findOne({ userID: req.body.userID,ContentID: req.params.id}, (err, data) => {
               if (err) {
                 console.log(err);
               }
@@ -290,7 +289,7 @@ app.post("/api/UNLikeUpdate/:id", (req, response) => {
                 });
               }
               if (data !== null) {
-                ActivityModel.updateOne({ userID: req.body.userID }, { UnLiked: true }, (err, res) => {
+                ActivityModel.updateOne({ userID: req.body.userID,ContentID: req.params.id}, { UnLiked: true }, (err, res) => {
                   if (err) {
                     console.log(err);
                   }
@@ -300,11 +299,6 @@ app.post("/api/UNLikeUpdate/:id", (req, response) => {
                 })
               }
             })
-
-
-
-
-
           }
         }
       );
@@ -316,6 +310,10 @@ app.post("/api/UNLikeUpdate/:id", (req, response) => {
 app.get("/uploads/:id", (req, res) => {
   res.sendFile(__dirname + "/uploads/" + req.params.id);
 });
+app.get("/api/activity/:id", (req, res) => {
+  const { id } = req.params;
+  // ActivityModel.findOne({_id})
+})
 app.listen(process.env.DB_PORT, async () => {
   try {
     await mongoose.connect("mongodb://localhost:27017/BoilerPlate_DB", {
