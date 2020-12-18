@@ -312,7 +312,14 @@ app.get("/uploads/:id", (req, res) => {
 });
 app.get("/api/activity/:id", (req, res) => {
   const { id } = req.params;
-  // ActivityModel.findOne({_id})
+  ActivityModel.findOne({ ContentID: id }, (err, data) => {
+    if (err) {
+      console.log(err);
+    }
+    if (data) {
+      res.json(data)
+    }
+  })
 })
 app.listen(process.env.DB_PORT, async () => {
   try {

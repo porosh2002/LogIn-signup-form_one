@@ -17,7 +17,15 @@ class Home extends PureComponent {
           Likes: res[0].Likes,
           DisLikes: res[0].UnLike,
         })
-      )
+    ).then(() => {
+      fetch(`${URL}api/activity/${this.state.video._id}`, {
+        method: "get",
+      }).then(res => res.json()).then(res => {
+        if (res !== undefined) {
+          this.setState({liked:res.Liked,Unliked:res.UnLiked})
+        }
+      })
+      })
       .then(() =>
         setTimeout(() => {
           fetch(`${URL}api/viewsUpdate/${this.state.video._id}`, {
