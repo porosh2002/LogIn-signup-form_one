@@ -3,8 +3,9 @@ import { URL } from "../serverUrl";
 import poster from "../Images/poster.jpg";
 import { connect } from "react-redux";
 import { selectCurrentUser } from "../Redux/user/user_selector";
-import { ImHeart} from "react-icons/im";
-import { AiFillApi} from "react-icons/ai";
+import { ImHeart } from "react-icons/im";
+import { AiFillApi } from "react-icons/ai";
+import Algo from '../Components/Video.js/AlgoVideo'
 class Home extends PureComponent {
   componentDidMount() {
     fetch(`${URL}api/video/${this.props.match.params.id}`, {
@@ -17,14 +18,14 @@ class Home extends PureComponent {
           Likes: res[0].Likes,
           DisLikes: res[0].UnLike,
         })
-    ).then(() => {
-      fetch(`${URL}api/activity/${this.state.video._id}`, {
-        method: "get",
-      }).then(res => res.json()).then(res => {
-        if (res !== undefined) {
-          this.setState({liked:res.Liked,Unliked:res.UnLiked})
-        }
-      })
+      ).then(() => {
+        fetch(`${URL}api/activity/${this.state.video._id}`, {
+          method: "get",
+        }).then(res => res.json()).then(res => {
+          if (res !== undefined) {
+            this.setState({ liked: res.Liked, Unliked: res.UnLiked })
+          }
+        })
       })
       .then(() =>
         setTimeout(() => {
@@ -38,8 +39,8 @@ class Home extends PureComponent {
     video: [],
     Likes: null,
     DisLikes: null,
-    liked:false,
-    Unliked:false
+    liked: false,
+    Unliked: false
   };
   LikeAdded = () => {
     const { userID } = this.props;
@@ -47,19 +48,19 @@ class Home extends PureComponent {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        userID:userID
+        userID: userID
       }),
     })
-    .then((res) => res.json())
+      .then((res) => res.json())
       .then((res) => this.setState({ Likes: res })).then(() => {
         fetch(`${URL}api/activity/${this.state.video._id}`, {
           method: "get",
         }).then(res => res.json()).then(res => {
           if (res !== undefined) {
-            this.setState({liked:res.Liked})
+            this.setState({ liked: res.Liked })
           }
         })
-    })
+      })
   };
   UnlikeAdded = () => {
     const { userID } = this.props;
@@ -68,7 +69,7 @@ class Home extends PureComponent {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         userID
-        }),
+      }),
     })
       .then((res) => res.json())
       .then((res) => this.setState({ DisLikes: res })).then(() => {
@@ -76,10 +77,10 @@ class Home extends PureComponent {
           method: "get",
         }).then(res => res.json()).then(res => {
           if (res !== undefined) {
-            this.setState({Unliked:res.UnLiked})
+            this.setState({ Unliked: res.UnLiked })
           }
         })
-    })
+      })
   };
   render() {
     const {
@@ -89,18 +90,19 @@ class Home extends PureComponent {
       UploaderName,
       UploadDetails,
       Views,
+      _id
     } = this.state.video;
     const { Likes, DisLikes, liked, Unliked } = this.state;
-    const styleLiked = liked ? ({backgroundColor:"#ff4500",color:"#f7f7f7"}) :null
-    const styleUNLiked = Unliked ? ({backgroundColor:"#ff4500",color:"#f7f7f7"}) :null
+    const styleLiked = liked ? ({ backgroundColor: "#ff4500", color: "#f7f7f7" }) : null
+    const styleUNLiked = Unliked ? ({ backgroundColor: "#ff4500", color: "#f7f7f7" }) : null
     return (
-      <div>
+      <div style={{ display: "flex", justifyContent: "space-evenly" }}>
         <div className="videoPlayer">
           <video
             poster={poster}
             style={{ width: "100%" }}
             src={`${URL}${filePath}`}
-            controls 
+            controls
           ></video>
           <div className="videoDetails">
             <p>{UploadDetails}</p>
@@ -150,6 +152,9 @@ class Home extends PureComponent {
             </div>
           </div>
         </div>
+        <div style={{ width: "300px" }}>
+          <Algo id={_id} />
+        </div>
       </div>
     );
   }
@@ -159,4 +164,4 @@ const mapStateToProps = (state) => {
     userID: selectCurrentUser(state),
   };
 };
-export default connect(mapStateToProps,null)(Home);
+export default connect(mapStateToProps, null)(Home);
