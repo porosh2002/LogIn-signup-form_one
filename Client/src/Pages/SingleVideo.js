@@ -35,12 +35,13 @@ class Home extends PureComponent {
         }, 15000)
       );
   }
-  // componentDidUpdate() {
-  //   // if (this.props.match.params.id !== this.state.id) {
-  //   //   this.UpdateVideoData()
-  //   // }
-  // }
-  
+  componentDidUpdate() {
+    if (this.state.id !== this.props.match.params.id) {
+      this.UpdateVideoData()
+      window.scrollTo(0, 0)
+      this.setState({id:this.props.match.params.id})
+    }
+  }
   componentDidMount() {
     this.UpdateVideoData()
   }
@@ -113,6 +114,7 @@ class Home extends PureComponent {
             style={{ width: "100%" }}
             src={`${URL}${filePath}`}
             controls
+            autoPlay
           ></video>
           <div className="videoDetails">
             <p>{UploadDetails}</p>
@@ -163,7 +165,7 @@ class Home extends PureComponent {
           </div>
         </div>
         <div style={{ width: "300px" }}>
-          {/* <Algo id={_id} /> */}
+          <Algo id={_id} />
         </div>
       </div>
     );

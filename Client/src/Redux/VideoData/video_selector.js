@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
-const selectAccountMenu = state => state.VideoReducer;
-export const AccountMenu = createSelector(
-  [selectAccountMenu],
+const selectVideo = state => state.VideoReducer;
+const AccountMenu = createSelector(
+  [selectVideo],
   videoData => videoData.video
 );
+export default AccountMenu
