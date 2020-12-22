@@ -1,9 +1,9 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import { URL } from "../serverUrl";
 import Video from '../Components/Video.js/Video'
 import Video2 from '../Components/Video.js/VideoMostView'
 import Video3 from '../Components/Video.js/LatestVideo'
-export class Home extends PureComponent {
+export class Home extends Component {
   componentDidMount() {
     fetch(`${URL}api/video`, {
       method: "get",

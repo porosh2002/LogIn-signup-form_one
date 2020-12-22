@@ -1,13 +1,12 @@
 
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import {URL} from '../../serverUrl'
-
-export class Thumbnail extends PureComponent {
+export class Thumbnail extends Component {
     componentDidMount() {
-        const {ThumbnailID} = this.props;
-        fetch(`${URL}api/thumbnail/${ThumbnailID}`).then(res=>{
-        this.setState({imageURl:res.url})
-        })
+        const { ThumbnailID } = this.props;
+        fetch(`${URL}api/thumbnail/${ThumbnailID}`, {
+            method:"get"
+        }).then(res=>this.setState({imageURl:res.url}))
     }
     state={
         imageURl:''

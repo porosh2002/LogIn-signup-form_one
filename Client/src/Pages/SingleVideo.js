@@ -7,7 +7,7 @@ import { ImHeart } from "react-icons/im";
 import { AiFillApi } from "react-icons/ai";
 import Algo from '../Components/Video.js/AlgoVideo'
 class Home extends PureComponent {
-  componentDidMount() {
+  UpdateVideoData = () => {
     fetch(`${URL}api/video/${this.props.match.params.id}`, {
       method: "get",
     })
@@ -35,12 +35,22 @@ class Home extends PureComponent {
         }, 15000)
       );
   }
+  // componentDidUpdate() {
+  //   // if (this.props.match.params.id !== this.state.id) {
+  //   //   this.UpdateVideoData()
+  //   // }
+  // }
+  
+  componentDidMount() {
+    this.UpdateVideoData()
+  }
   state = {
     video: [],
     Likes: null,
     DisLikes: null,
     liked: false,
-    Unliked: false
+    Unliked: false,
+    id:this.props.match.params.id
   };
   LikeAdded = () => {
     const { userID } = this.props;
@@ -153,7 +163,7 @@ class Home extends PureComponent {
           </div>
         </div>
         <div style={{ width: "300px" }}>
-          <Algo id={_id} />
+          {/* <Algo id={_id} /> */}
         </div>
       </div>
     );
