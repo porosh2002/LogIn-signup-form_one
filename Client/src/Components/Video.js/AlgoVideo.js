@@ -11,7 +11,7 @@ export default class AlgoVideo extends PureComponent {
     }
   }
   componentDidMount() {
-    // axios.get(`${URL}api/video`).then(res =>this.setState({video:res.data}))
+    axios.get(`${URL}api/video`).then(res =>this.setState({video:res.data}))
   }
     render() {
       const { id } = this.props;

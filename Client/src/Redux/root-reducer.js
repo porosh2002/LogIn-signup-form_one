@@ -3,6 +3,7 @@ import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage/session';
 import userSET from './user/reducers';
 import AccountMenu from './AccountMenu/reducers'
+import VideoReducer from './VideoData/reducers'
 import NotificationMenu from './NotificationMenu/reducers'
 const persistConfig = {
   key: 'root',
@@ -12,6 +13,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   user:userSET,
   AccountMenu:AccountMenu,
-  NofMenu:NotificationMenu
+  NofMenu: NotificationMenu,
+  VideoReducer:VideoReducer
 });
 export default persistReducer(persistConfig, rootReducer);

@@ -1,14 +1,19 @@
 import React, { Component } from "react";
 import { URL } from "../serverUrl";
+import { connect } from 'react-redux';
+import {setVideoData} from '../Redux/VideoData/actions'
 import Video from '../Components/Video.js/Video'
 import Video2 from '../Components/Video.js/VideoMostView'
 import Video3 from '../Components/Video.js/LatestVideo'
-export class Home extends Component {
+class Home extends Component {
   componentDidMount() {
     fetch(`${URL}api/video`, {
       method: "get",
     })
-      .then((res) => res.json()).then((res) => this.setState({ video: res }));
+      .then((res) => res.json()).then((res) => {
+        this.setState({ video: res })
+        this.props.saveVideoData(res)
+      });
   }
   state = {
     video: [],
@@ -25,5 +30,9 @@ export class Home extends Component {
     </div>;
   }
 }
-
-export default Home;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    saveVideoData: (status) => dispatch(setVideoData(status)),
+  };
+};
+export default connect(null,mapDispatchToProps)(Home);
