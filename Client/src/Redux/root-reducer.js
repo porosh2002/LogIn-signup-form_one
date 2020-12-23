@@ -14,6 +14,6 @@ const rootReducer = combineReducers({
   user:userSET,
   AccountMenu:AccountMenu,
   NofMenu: NotificationMenu,
-  VideoReducer:VideoReducer
+  VideoFile:VideoReducer
 });
 export default persistReducer(persistConfig, rootReducer);

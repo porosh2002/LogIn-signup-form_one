@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import selectVideo from '../../Redux/VideoData/video_selector'
  class AlgoVideo extends PureComponent {
    render() {
-     const {id,video} = this.props
+     const { id, video } = this.props
       return (
         <div>
           {video.map((data, i) => {

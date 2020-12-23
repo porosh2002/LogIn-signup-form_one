@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { selectCurrentUser } from "../Redux/user/user_selector";
 import { ImHeart } from "react-icons/im";
 import { AiFillApi } from "react-icons/ai";
+// import selectVideo from '../Redux/VideoData/video_selector'
 import Algo from '../Components/Video.js/AlgoVideo'
 class Home extends PureComponent {
   UpdateVideoData = () => {

@@ -3,10 +3,12 @@ import { Switch, Route,
   //  Redirect 
   } from "react-router-dom";
 import Footer from "./Footer";
+import {URL} from './serverUrl'
 import { connect } from "react-redux";
 import Navigation from "./Components/Navigation/Navigation";
 import { selectCurrentUser } from "./Redux/user/user_selector";
-import {AccountMenu} from './Redux/AccountMenu/acc_selector'
+import { AccountMenu } from './Redux/AccountMenu/acc_selector'
+import {setVideoData} from './Redux/VideoData/actions'
 import { setAccountMenu } from "./Redux/AccountMenu/actions";
 import { setNotificationMenu } from "./Redux/NotificationMenu/actions";
 import { NotificationMenu} from "./Redux/NotificationMenu/nof_selector";
@@ -17,6 +19,15 @@ const SingleVideo = React.lazy(() => import("./Pages/SingleVideo"));
 const Signup = React.lazy(() => import("./Pages/Signup"));
 const Upload = React.lazy(() => import("./Pages/Upload"));
 class App extends Component {
+  componentDidMount() {
+    fetch(`${URL}api/video`, {
+      method: "get",
+    })
+      .then((res) => res.json()).then((res) => {
+        this.props.saveVideoData(res)
+      });
+  }
+  
 closenavigationmenu=()=>{
   const {notification_menu,account_menu} = this.props;
   if(notification_menu === true){
@@ -66,6 +77,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setAccountMenu: (status) => dispatch(setAccountMenu(status)),
     NotificationMenu: (status) => dispatch(setNotificationMenu(status)),
+    saveVideoData: (status) => dispatch(setVideoData(status)),
   };
 };
 export default connect(mapStateToProps,mapDispatchToProps)(App);

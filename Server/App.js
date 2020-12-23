@@ -213,7 +213,7 @@ app.post("/api/LikeUpdate/:id", (req, response) => {
           if (err) {
             console.log(err);
           } else {
-            ActivityModel.findOne({ userID:userID,ContentID: req.params.id}, (err, data) => {
+            ActivityModel.findOne({ userID: userID, ContentID: req.params.id }, (err, data) => {
               if (err) {
                 console.log(err);
               }
@@ -234,7 +234,7 @@ app.post("/api/LikeUpdate/:id", (req, response) => {
                 });
               }
               if (data !== null) {
-                ActivityModel.updateOne({ userID: req.body.userID , ContentID: req.params.id }, { Liked: true }, (err, res) => {
+                ActivityModel.updateOne({ userID: req.body.userID, ContentID: req.params.id }, { Liked: true }, (err, res) => {
                   if (err) {
                     console.log(err);
                   }
@@ -268,7 +268,7 @@ app.post("/api/UNLikeUpdate/:id", (req, response) => {
 
 
 
-            ActivityModel.findOne({ userID: req.body.userID,ContentID: req.params.id}, (err, data) => {
+            ActivityModel.findOne({ userID: req.body.userID, ContentID: req.params.id }, (err, data) => {
               if (err) {
                 console.log(err);
               }
@@ -289,7 +289,7 @@ app.post("/api/UNLikeUpdate/:id", (req, response) => {
                 });
               }
               if (data !== null) {
-                ActivityModel.updateOne({ userID: req.body.userID,ContentID: req.params.id}, { UnLiked: true }, (err, res) => {
+                ActivityModel.updateOne({ userID: req.body.userID, ContentID: req.params.id }, { UnLiked: true }, (err, res) => {
                   if (err) {
                     console.log(err);
                   }
@@ -312,7 +312,7 @@ app.get("/uploads/:id", (req, res) => {
 });
 app.get("/api/activity/:id/:Userid", (req, res) => {
   const { id, Userid } = req.params;
-  ActivityModel.findOne({ContentID: id,userID: Userid}, (err, data) => {
+  ActivityModel.findOne({ ContentID: id, userID: Userid }, (err, data) => {
     if (err) {
       console.log(err);
     }
@@ -322,8 +322,8 @@ app.get("/api/activity/:id/:Userid", (req, res) => {
   })
 })
 app.get("/api/activity/:id", (req, res) => {
-  const { id} = req.params;
-  ActivityModel.findOne({ContentID: id}, (err, data) => {
+  const { id } = req.params;
+  ActivityModel.findOne({ ContentID: id }, (err, data) => {
     if (err) {
       console.log(err);
     }
