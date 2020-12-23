@@ -229,7 +229,7 @@ app.post("/api/LikeUpdate/:id", (req, response) => {
                     console.log(err);
                   }
                   if (noerr) {
-
+                    response.json(newLikes);
                   }
                 });
               }
@@ -284,7 +284,7 @@ app.post("/api/UNLikeUpdate/:id", (req, response) => {
                     console.log(err);
                   }
                   if (noerr) {
-
+                    response.json(newUnLikes);
                   }
                 });
               }
@@ -310,9 +310,20 @@ app.post("/api/UNLikeUpdate/:id", (req, response) => {
 app.get("/uploads/:id", (req, res) => {
   res.sendFile(__dirname + "/uploads/" + req.params.id);
 });
+app.get("/api/activity/:id/:Userid", (req, res) => {
+  const { id, Userid } = req.params;
+  ActivityModel.findOne({ContentID: id,userID: Userid}, (err, data) => {
+    if (err) {
+      console.log(err);
+    }
+    if (data) {
+      res.json(data)
+    }
+  })
+})
 app.get("/api/activity/:id", (req, res) => {
-  const { id } = req.params;
-  ActivityModel.findOne({ ContentID: id }, (err, data) => {
+  const { id} = req.params;
+  ActivityModel.findOne({ContentID: id}, (err, data) => {
     if (err) {
       console.log(err);
     }

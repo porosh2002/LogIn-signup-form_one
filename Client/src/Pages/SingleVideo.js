@@ -8,6 +8,7 @@ import { AiFillApi } from "react-icons/ai";
 import Algo from '../Components/Video.js/AlgoVideo'
 class Home extends PureComponent {
   UpdateVideoData = () => {
+    const { userID } = this.props;
     fetch(`${URL}api/video/${this.props.match.params.id}`, {
       method: "get",
     })
@@ -19,12 +20,11 @@ class Home extends PureComponent {
           DisLikes: res[0].UnLike,
         })
       ).then(() => {
-        fetch(`${URL}api/activity/${this.state.video._id}`, {
+        fetch(`${URL}api/activity/${this.state.video._id}/${userID}`, {
           method: "get",
         }).then(res => res.json()).then(res => {
           if (res !== undefined) {
-            console.log(res);
-            this.setState({ liked: res.Liked, Unliked: res.UnLiked })
+            this.setState({ liked: res.Liked, unliked: res.UnLiked })
           }
         })
       })
@@ -51,7 +51,7 @@ class Home extends PureComponent {
     Likes: null,
     DisLikes: null,
     liked: false,
-    Unliked: false,
+    unliked: false,
     id:this.props.match.params.id
   };
   LikeAdded = () => {
@@ -60,8 +60,8 @@ class Home extends PureComponent {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        userID: userID
-      }),
+        userID
+      })
     })
       .then((res) => res.json())
       .then((res) => this.setState({ Likes: res })).then(() => {
@@ -83,16 +83,16 @@ class Home extends PureComponent {
         userID
       }),
     })
-      .then((res) => res.json())
-      .then((res) => this.setState({ DisLikes: res })).then(() => {
-        fetch(`${URL}api/activity/${this.state.video._id}`, {
-          method: "get",
-        }).then(res => res.json()).then(res => {
-          if (res !== undefined) {
-            this.setState({ Unliked: res.UnLiked })
-          }
-        })
+    .then((res) => res.json())
+    .then((res) => this.setState({ unliked: res })).then(() => {
+      fetch(`${URL}api/activity/${this.state.video._id}`, {
+        method: "get",
+      }).then(res => res.json()).then(res => {
+        if (res !== undefined) {
+          this.setState({ unliked: res.UnLiked })
+        }
       })
+    })
   };
   render() {
     const {
@@ -104,9 +104,9 @@ class Home extends PureComponent {
       Views,
       _id
     } = this.state.video;
-    const { Likes, DisLikes, liked, Unliked } = this.state;
+    const { Likes, DisLikes, liked, unliked } = this.state;
     const styleLiked = liked ? ({ backgroundColor: "#ff4500", color: "#f7f7f7" }) : null
-    const styleUNLiked = Unliked ? ({ backgroundColor: "#ff4500", color: "#f7f7f7" }) : null
+    const styleUNLiked = unliked ? ({ backgroundColor: "#ff4500", color: "#f7f7f7" }) : null
     return (
       <div style={{ display: "flex", justifyContent: "space-evenly" }}>
         <div className="videoPlayer">
