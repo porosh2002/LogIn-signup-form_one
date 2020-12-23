@@ -46,7 +46,7 @@ export default class Signup extends Component {
           }).then((res) => {
             if (res.status === 200) {
               alert("Account Created")
-              //! account Created Successfully
+              this.props.history.push('/login')
             } else {
               this.setState({ errorHappend: true });
             }

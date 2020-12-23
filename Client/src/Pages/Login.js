@@ -36,6 +36,8 @@ class Login extends Component {
           if (res.status === 200) {
             res.json().then((res) => {
               this.props.setUserID(res);
+              alert('LogIn Successful')
+              this.props.history.push('/')
             });
           } else {
             this.setState({ errorHappend: true });
