@@ -213,7 +213,7 @@ app.post("/api/LikeUpdate/:id", (req, response) => {
           if (err) {
             console.log(err);
           } else {
-            ActivityModel.findOne({ userID: req.body.userID,ContentID: req.params.id}, (err, data) => {
+            ActivityModel.findOne({ userID:userID,ContentID: req.params.id}, (err, data) => {
               if (err) {
                 console.log(err);
               }

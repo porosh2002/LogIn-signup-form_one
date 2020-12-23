@@ -23,6 +23,7 @@ class Home extends PureComponent {
           method: "get",
         }).then(res => res.json()).then(res => {
           if (res !== undefined) {
+            console.log(res);
             this.setState({ liked: res.Liked, Unliked: res.UnLiked })
           }
         })
