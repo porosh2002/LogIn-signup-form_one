@@ -70,15 +70,7 @@ class Home extends PureComponent {
         })
       })
         .then((res) => res.json())
-        .then((res) => this.setState({ Likes: res })).then(() => {
-          fetch(`${URL}api/activity/${this.state.video._id}`, {
-            method: "get",
-          }).then(res => res.json()).then(res => {
-            if (res !== undefined) {
-              this.setState({ liked: res.Liked })
-            }
-          })
-        })
+        .then((res) => this.setState({ Likes: res }))
     }
     else {
       this.setState({errorHappend:true})
@@ -95,15 +87,7 @@ class Home extends PureComponent {
         }),
       })
       .then((res) => res.json())
-      .then((res) => this.setState({ unliked: res })).then(() => {
-        fetch(`${URL}api/activity/${this.state.video._id}`, {
-          method: "get",
-        }).then(res => res.json()).then(res => {
-          if (res !== undefined) {
-            this.setState({ unliked: res.UnLiked })
-          }
-        })
-      })
+      .then((res) => this.setState({DisLikes:res}))
     }
     else {
       this.setState({errorHappend:true})
