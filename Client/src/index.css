@@ -209,3 +209,17 @@ video {
 .UpDownVote div:active {
   background-color: #317c33be;
 }
+.accountMenuBtn{
+  padding:10px 15px;
+  font-size: 17px;
+  letter-spacing:.5px;
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  background-color: #343a40;
+  margin: 10px 0px;
+  border-radius:3px;
+}
+.accountMenuBtn:hover{
+background-color: #343a40bd;
+}
