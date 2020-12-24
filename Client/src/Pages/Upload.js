@@ -4,7 +4,6 @@ import DropThumb from "../Components/Dropzone/DropThumb";
 import { URL } from "../serverUrl";
 import moment from 'moment';
 import { v4 as uuidv4 } from "uuid";
-import Error from "../Components/Error/Error";
 import axios from "axios";
 import { DIVUPLOAD, Input, TextArea, Button } from "../Styled";
 const config = {
@@ -18,12 +17,10 @@ export class Upload extends PureComponent {
     fileName: "",
     filePath: "",
     Thumbnail: "",
-    errorHappend: false,
     UploaderName: "unknown",
     UploadDetails: null
   };
   OnFileUpload = (e) => {
-    if (this.props.match.params.id === 'porosh') {
       this.setState({ UploadDetails: moment().format('MMMM Do YYYY') })
     this.setState({ Video: e[0] });
     const formData = new FormData();
@@ -42,10 +39,6 @@ export class Upload extends PureComponent {
         this.setState({ errorHappend: true });
       }
     });
-    }
-    else {
-      alert("You have no Access")
-    }
   };
   OnThumbSelect = (e) => {
     this.setState({ Thumbnail: e[0] });
@@ -55,7 +48,6 @@ export class Upload extends PureComponent {
     this.setState({ [name]: value });
   };
   UploadFile = (e) => {
-    if (this.props.match.params.id === 'porosh') {
       const { Title, Des, fileName, filePath, Thumbnail, UploaderName, UploadDetails } = this.state;
 
       if (
@@ -97,20 +89,10 @@ export class Upload extends PureComponent {
       } else {
         alert("something missing");
       }
-    }
-    if (this.props.match.params.id === 'test') {
-      alert("You have no access to upload video")
-    }
   };
   render() {
-    // this.props.match.params.id
-    const { errorHappend } = this.state;
-    const styleError = errorHappend ? null : { display: "none" };
     return (
       <div>
-        <div style={styleError}>
-          <Error />
-        </div>
         <DIVUPLOAD>
           <p className="title title-b">Upload Video</p>
           <div style={{ margin: "20px 0px" }}>
