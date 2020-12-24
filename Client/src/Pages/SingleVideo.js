@@ -57,23 +57,28 @@ class Home extends PureComponent {
   };
   LikeAdded = () => {
     const { userID } = this.props;
-    fetch(`${URL}api/LikeUpdate/${this.state.video._id}`, {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        userID
-      })
-    })
-      .then((res) => res.json())
-      .then((res) => this.setState({ Likes: res })).then(() => {
-        fetch(`${URL}api/activity/${this.state.video._id}`, {
-          method: "get",
-        }).then(res => res.json()).then(res => {
-          if (res !== undefined) {
-            this.setState({ liked: res.Liked })
-          }
+    if (userID !== undefined) {
+      fetch(`${URL}api/LikeUpdate/${this.state.video._id}`, {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userID
         })
       })
+        .then((res) => res.json())
+        .then((res) => this.setState({ Likes: res })).then(() => {
+          fetch(`${URL}api/activity/${this.state.video._id}`, {
+            method: "get",
+          }).then(res => res.json()).then(res => {
+            if (res !== undefined) {
+              this.setState({ liked: res.Liked })
+            }
+          })
+        })
+    }
+    else {
+      
+    }
   };
   UnlikeAdded = () => {
     const { userID } = this.props;

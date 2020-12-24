@@ -4,6 +4,7 @@ import { URL } from "../serverUrl";
 import validator from "validator";
 import { connect } from "react-redux";
 import { setUser } from "../Redux/user/actions";
+import SuccessMessage from '../Components/Success/successMessage'
 import Error from "../Components/Error/Error";
 import { Link } from "react-router-dom";
 class Login extends Component {
@@ -13,6 +14,7 @@ class Login extends Component {
       email: "",
       password: "",
       errorHappend: false,
+      LoginSuccess:false
     };
   }
   InputValue = (event) => {
@@ -36,8 +38,13 @@ class Login extends Component {
           if (res.status === 200) {
             res.json().then((res) => {
               this.props.setUserID(res);
-              alert('LogIn Successful')
-              this.props.history.push('/')
+              this.setState({ LoginSuccess: true })
+              const Redirect = () => {
+                this.props.history.push('/')
+              }
+              setTimeout(function () {
+                Redirect()
+              },1000);
             });
           } else {
             this.setState({ errorHappend: true });
@@ -45,17 +52,22 @@ class Login extends Component {
         });
       }
     } catch {
-      alert("something went wrong try again later");
+      this.setState({ errorHappend: true });
     }
   };
   closeErrorDialog = () => {
     this.setState({ errorHappend: false });
   };
   render() {
-    const { errorHappend } = this.state;
+    const { errorHappend, LoginSuccess } = this.state;
     const styleError = errorHappend ? null : { display: "none" };
+    const styleSuccess = LoginSuccess ? null : { display: "none" };
     return (
-      <div style={{textAlign:"center",margin:"50px 0px"}}>
+      <div style={{ textAlign: "center", margin: "50px 0px" }}>
+        <div style={styleSuccess}>
+          <SuccessMessage message0={" Login "}
+            message1={"Successful"}></SuccessMessage>
+        </div>
         <div style={styleError}>
           <Error
             onClick={this.closeErrorDialog}
@@ -85,7 +97,7 @@ class Login extends Component {
           />
           <Button type="submit" value="Login" />
         </form>
-          <Link className='LinkToAccount' to='/signup'>create account</Link>
+        <Link className='LinkToAccount' to='/signup'>create account</Link>
       </div>
     );
   }
