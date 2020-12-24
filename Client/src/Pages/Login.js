@@ -41,6 +41,7 @@ class Login extends Component {
               this.setState({ LoginSuccess: true })
               const Redirect = () => {
                 this.props.history.push('/')
+                this.setState({ LoginSuccess:false})
               }
               setTimeout(function () {
                 Redirect()

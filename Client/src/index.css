@@ -223,3 +223,12 @@ video {
 .accountMenuBtn:hover{
 background-color: #343a40bd;
 }
+.LogoutDIV{
+  position:absolute;
+  padding:40px 0px 50px 0px;
+  width:90vw;
+  text-align: center;
+  color: orangered;
+  font-size:17px;
+  background-color: #29303b;
+}

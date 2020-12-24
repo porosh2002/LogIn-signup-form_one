@@ -3,12 +3,13 @@ import Logo from "../../Images/logo.png";
 import { IconWrap } from "../../Styled";
 import {URL} from '../../serverUrl' 
 import Search from "../Search/Search";
-import { Link } from "react-router-dom";
+import { Link,withRouter} from "react-router-dom";
 import { setUser } from "../../Redux/user/actions";
 import { selectCurrentUser } from "../../Redux/user/user_selector";
 import { AccountMenu } from "../../Redux/AccountMenu/acc_selector";
 import { setAccountMenu } from "../../Redux/AccountMenu/actions";
 import { setNotificationMenu } from "../../Redux/NotificationMenu/actions";
+import SuccessMessage from '../Success/SuccessLogout'
 import { NotificationMenu } from "../../Redux/NotificationMenu/nof_selector";
 import { VscAdd, VscBellDot, VscAccount } from "react-icons/vsc";
 import { connect } from "react-redux";
@@ -16,7 +17,8 @@ class Navigation extends PureComponent {
   state = {
     navOpen: this.props.notification_menu,
     AccOpen: this.props.account_menu,
-    name:null
+    name: null,
+    LoginSuccess:false
   };
   componentDidMount() {
     const {userID} = this.props;
@@ -46,8 +48,11 @@ class Navigation extends PureComponent {
     this.props.setAccountMenu(!this.state.AccOpen);
   };
   LogmeOut = () => {
-    alert('Logout Successful')
     this.props.setUserID(undefined);
+    this.setState({ LoginSuccess: true })
+    setTimeout(function () {
+      window.location.reload()
+    },1000);
   }
   CloseCall = () => {
     this.setState({ navOpen: false, AccOpen: false });
@@ -62,12 +67,24 @@ class Navigation extends PureComponent {
     }
   };
   render() {
-    const { navOpen, AccOpen} = this.state;
+    console.log(this.props);
+    const { navOpen, AccOpen,LoginSuccess } = this.state;
     const { userID } = this.props;
     const NavStyle = navOpen ? null : { display: "none" };
     const AccStyle = AccOpen ? null : { display: "none" };
+    const styleSuccess = LoginSuccess ? null : { display: "none" };
     return (
       <div onClick={this.CloseCallTrue} className="navigation">
+        
+
+
+            <div style={styleSuccess}>
+          <SuccessMessage message0={" Logout "}
+            message1={"Successful"}></SuccessMessage>
+        </div>
+
+
+
         <Link to="/">
           <img className="logo" src={Logo} alt="logo" />
         </Link>
@@ -113,4 +130,4 @@ const mapDispatchToProps = (dispatch) => {
     setUserID: (user) => dispatch(setUser(user)),
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Navigation));
