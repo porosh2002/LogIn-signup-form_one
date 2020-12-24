@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button, Input } from "../Styled";
 import {Link} from 'react-router-dom';
 import { URL } from "../serverUrl";
+import SuccessMessage from '../Components/Success/successMessage'
 import validator from "validator";
 import Error from "../Components/Error/Error";
 export default class Signup extends Component {
@@ -14,6 +15,7 @@ export default class Signup extends Component {
       repassword: "",
       passmatch: false,
       errorHappend: false,
+      LoginSuccess:false
     };
   }
   InputValue = (event) => {
@@ -45,8 +47,13 @@ export default class Signup extends Component {
             }),
           }).then((res) => {
             if (res.status === 200) {
-              alert("Account Created")
-              this.props.history.push('/login')
+              this.setState({ LoginSuccess: true })
+              const Redirect = () => {
+                this.props.history.push('/login')
+              }
+              setTimeout(function () {
+                Redirect()
+              },1000);
             } else {
               this.setState({ errorHappend: true });
             }
@@ -58,14 +65,19 @@ export default class Signup extends Component {
     }
   };
   render() {
-    const { passmatch, errorHappend } = this.state;
+    const { passmatch, errorHappend,LoginSuccess } = this.state;
     const stylePassMatch = passmatch
       ? { border: "1px solid red", backgroundColor: " #fed8b1" }
       : null;
     const styleError = errorHappend ? null : { display: "none" };
     const stylePassMessage = passmatch ? null : { display: "none" };
+    const styleSuccess = LoginSuccess ? null : { display: "none" };
     return (
-      <div style={{textAlign:"center",margin:"50px 0px"}}>
+      <div style={{ textAlign: "center", margin: "50px 0px" }}>
+                <div style={styleSuccess}>
+          <SuccessMessage message0={" Account Created "}
+            message1={"Successfully"}></SuccessMessage>
+        </div>
         <div style={styleError}>
           <Error
             onClick={this.closeErrorDialog}
