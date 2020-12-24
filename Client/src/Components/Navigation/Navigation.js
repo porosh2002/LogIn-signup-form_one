@@ -50,13 +50,16 @@ class Navigation extends PureComponent {
   LogmeOut = () => {
     this.props.setUserID(undefined);
     this.setState({ LoginSuccess: true })
-    setTimeout(function () {
-      window.location.reload()
-    },1000);
+      setTimeout(function () {
+        window.location.reload()
+      },1000);
   }
   CloseCall = () => {
     this.setState({ navOpen: false, AccOpen: false });
   };
+  CloseCallError = () => {
+    this.setState({LoginSuccess:false})
+  }
   CloseCallTrue = () => {
     const { navOpen, AccOpen } = this.state;
     if (navOpen) {
@@ -79,7 +82,7 @@ class Navigation extends PureComponent {
 
 
             <div style={styleSuccess}>
-          <SuccessMessage message0={" Logout "}
+          <SuccessMessage onClick={this.CloseCallError} message0={" Logout "}
             message1={"Successful"}></SuccessMessage>
         </div>
 
