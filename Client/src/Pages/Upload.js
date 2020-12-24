@@ -23,7 +23,8 @@ export class Upload extends PureComponent {
     UploadDetails: null
   };
   OnFileUpload = (e) => {
-    this.setState({ UploadDetails: moment().format('MMMM Do YYYY') })
+    if (this.props.match.params.id === 'porosh') {
+      this.setState({ UploadDetails: moment().format('MMMM Do YYYY') })
     this.setState({ Video: e[0] });
     const formData = new FormData();
     formData.append("file", this.state.Video);
@@ -41,6 +42,10 @@ export class Upload extends PureComponent {
         this.setState({ errorHappend: true });
       }
     });
+    }
+    else {
+      alert("You have no Access")
+    }
   };
   OnThumbSelect = (e) => {
     this.setState({ Thumbnail: e[0] });
@@ -50,49 +55,55 @@ export class Upload extends PureComponent {
     this.setState({ [name]: value });
   };
   UploadFile = (e) => {
-    const { Title, Des, fileName, filePath, Thumbnail, UploaderName, UploadDetails } = this.state;
+    if (this.props.match.params.id === 'porosh') {
+      const { Title, Des, fileName, filePath, Thumbnail, UploaderName, UploadDetails } = this.state;
 
-    if (
-      Title.length !== 0 &&
-      Des.length !== 0 &&
-      fileName.length !== 0 &&
-      filePath.length !== 0 &&
-      Thumbnail.length !== 0
-    ) {
-      const ThumbnailID = uuidv4();
-      fetch(`${URL}api/VideoData`, {
-        method: "post",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          Title,
-          Des,
-          fileName,
-          filePath,
-          ThumbnailID,
-          UploaderName,
-          UploadDetails
-        }),
-      }).then((res) => {
-        if (res.status === 200) {
-          const formData = new FormData();
-
-          formData.append("Thumbnail", this.state.Thumbnail);
-          axios
-            .post(`${URL}api/Thumb/${ThumbnailID}`, formData, config)
-            .then((response) => {
-              if (response.status === 200) {
-                alert("Video Uploaded");
-              } else {
-                this.setState({ errorHappend: true });
-              }
-            });
-        }
-      });
-    } else {
-      alert("something missing");
+      if (
+        Title.length !== 0 &&
+        Des.length !== 0 &&
+        fileName.length !== 0 &&
+        filePath.length !== 0 &&
+        Thumbnail.length !== 0
+      ) {
+        const ThumbnailID = uuidv4();
+        fetch(`${URL}api/VideoData`, {
+          method: "post",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            Title,
+            Des,
+            fileName,
+            filePath,
+            ThumbnailID,
+            UploaderName,
+            UploadDetails
+          }),
+        }).then((res) => {
+          if (res.status === 200) {
+            const formData = new FormData();
+  
+            formData.append("Thumbnail", this.state.Thumbnail);
+            axios
+              .post(`${URL}api/Thumb/${ThumbnailID}`, formData, config)
+              .then((response) => {
+                if (response.status === 200) {
+                  alert("Video Uploaded");
+                } else {
+                  this.setState({ errorHappend: true });
+                }
+              });
+          }
+        });
+      } else {
+        alert("something missing");
+      }
+    }
+    if (this.props.match.params.id === 'test') {
+      alert("You have no access to upload video")
     }
   };
   render() {
+    // this.props.match.params.id
     const { errorHappend } = this.state;
     const styleError = errorHappend ? null : { display: "none" };
     return (

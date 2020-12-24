@@ -93,7 +93,7 @@ class Navigation extends PureComponent {
         </Link>
         <Search />
         <nav style={{ margin: "18px 0px", overflow: "hidden" }}>
-          <IconWrap onClick={this.CloseCall} to="/upload">
+          <IconWrap onClick={this.CloseCall} to="/upload/test">
             <VscAdd />
           </IconWrap>
           <IconWrap onClick={this.navOpenCall} to="#">
