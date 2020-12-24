@@ -44,6 +44,9 @@ class Home extends PureComponent {
       this.setState({id:this.props.match.params.id})
     }
   }
+  closeError = () => {
+    this.setState({errorHappend:false})
+  }
   componentDidMount() {
     this.UpdateVideoData()
   }
@@ -79,7 +82,6 @@ class Home extends PureComponent {
     }
     else {
       this.setState({errorHappend:true})
-        // this.setState({errorHappend:false})
     }
   };
   UnlikeAdded = () => {
@@ -105,7 +107,6 @@ class Home extends PureComponent {
     }
     else {
       this.setState({errorHappend:true})
-      
     }
   };
   render() {
@@ -124,19 +125,19 @@ class Home extends PureComponent {
     const styleError = errorHappend ? null : { display: "none" };
     return (
       <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+        <div className="videoPlayer">
                 <div style={styleError}>
-          <Error
+          <Error onClick={this.closeError}
             message0={"Ops! "}
             message1={`Please Login`}
           />
         </div>
-        <div className="videoPlayer">
           <video
             poster={poster}
             style={{ width: "100%" }}
             src={`${URL}${filePath}`}
             controls
-            // autoPlay
+            autoPlay
           ></video>
           <div className="videoDetails">
             <p>{UploadDetails}</p>
