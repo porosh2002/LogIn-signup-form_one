@@ -10,7 +10,7 @@ class Home extends Component {
     return <div>
       <h2 style={{ margin: "50px 0px 20px 30px", letterSpacing: "1px", color: "#29303b" }}>Latest Video</h2>
       {video.length !== 0 ? (<Video3 video={video} />) : null}
-      <h2 style={{ margin: "50px 0px 20px 30px", letterSpacing: "1px", color: "#29303b" }}>Most viewed videos</h2>
+      <h2 style={{ margin: "50px 0px 20px 30px", letterSpacing: "1px", color: "#29303b" }}>Trending</h2>
       {video.length !== 0 ? (<Video2 video={video} />) : null}
       <h2 style={{ margin: "50px 0px 20px 30px", letterSpacing: "1px", color: "#29303b" }}>All Videos</h2>
       {video.length !== 0 ? (<Video video={video} />) : null}
