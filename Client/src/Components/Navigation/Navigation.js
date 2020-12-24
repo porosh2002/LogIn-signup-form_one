@@ -4,6 +4,7 @@ import { IconWrap } from "../../Styled";
 import {URL} from '../../serverUrl' 
 import Search from "../Search/Search";
 import { Link } from "react-router-dom";
+import { setUser } from "../../Redux/user/actions";
 import { selectCurrentUser } from "../../Redux/user/user_selector";
 import { AccountMenu } from "../../Redux/AccountMenu/acc_selector";
 import { setAccountMenu } from "../../Redux/AccountMenu/actions";
@@ -44,6 +45,10 @@ class Navigation extends PureComponent {
   AccOpenCall = () => {
     this.props.setAccountMenu(!this.state.AccOpen);
   };
+  LogmeOut = () => {
+    alert('Logout Successful')
+    this.props.setUserID(undefined);
+  }
   CloseCall = () => {
     this.setState({ navOpen: false, AccOpen: false });
   };
@@ -83,7 +88,7 @@ class Navigation extends PureComponent {
         </div>
         <div style={AccStyle} className="NotificationDiv">
           <div style={{width:"90%",textAlign:"center"}} className="NotificationMessage">{userID !== undefined ? (<div><p style={{fontSize:"18px"}}>{this.state.name}</p><p style={{marginBottom:"10px"}}>{userID}</p><div>
-          <Link className='accountMenuBtn' to='/login'>Logout</Link>
+          <Link onClick={this.LogmeOut} className='accountMenuBtn' to='/'>Logout</Link>
           </div></div>) : (<div>
               <Link className='accountMenuBtn' to='/login'>Login now</Link>
               <Link className='accountMenuBtn' to='/signup'>Sign up</Link>
@@ -105,6 +110,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setAccountMenu: (status) => dispatch(setAccountMenu(status)),
     NotificationMenu: (status) => dispatch(setNotificationMenu(status)),
+    setUserID: (user) => dispatch(setUser(user)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
