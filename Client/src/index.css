@@ -224,11 +224,16 @@ video {
 background-color: #343a40bd;
 }
 .LogoutDIV{
-  position:absolute;
+  position:fixed;
   padding:40px 0px 50px 0px;
   width:90vw;
   text-align: center;
   color: orangered;
   font-size:17px;
+  z-index:9999999999999999999999999999999999999999;
   background-color: #29303b;
+}
+.loginModal{
+  color: #f7f7f7;
+  margin:0px 3px;
 }

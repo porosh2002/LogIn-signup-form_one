@@ -4,8 +4,8 @@ import poster from "../Images/poster.jpg";
 import { connect } from "react-redux";
 import { selectCurrentUser } from "../Redux/user/user_selector";
 import { ImHeart } from "react-icons/im";
+import Error from "../Components/Success/SuccessLogout"
 import { AiFillApi } from "react-icons/ai";
-// import selectVideo from '../Redux/VideoData/video_selector'
 import Algo from '../Components/Video.js/AlgoVideo'
 class Home extends PureComponent {
   UpdateVideoData = () => {
@@ -53,7 +53,8 @@ class Home extends PureComponent {
     DisLikes: null,
     liked: false,
     unliked: false,
-    id:this.props.match.params.id
+    id: this.props.match.params.id,
+    errorHappend:false
   };
   LikeAdded = () => {
     const { userID } = this.props;
@@ -77,28 +78,35 @@ class Home extends PureComponent {
         })
     }
     else {
-      
+      this.setState({errorHappend:true})
+        // this.setState({errorHappend:false})
     }
   };
   UnlikeAdded = () => {
     const { userID } = this.props;
-    fetch(`${URL}api/UNLikeUpdate/${this.state.video._id}`, {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        userID
-      }),
-    })
-    .then((res) => res.json())
-    .then((res) => this.setState({ unliked: res })).then(() => {
-      fetch(`${URL}api/activity/${this.state.video._id}`, {
-        method: "get",
-      }).then(res => res.json()).then(res => {
-        if (res !== undefined) {
-          this.setState({ unliked: res.UnLiked })
-        }
+    if (userID !== undefined) {
+      fetch(`${URL}api/UNLikeUpdate/${this.state.video._id}`, {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userID
+        }),
       })
-    })
+      .then((res) => res.json())
+      .then((res) => this.setState({ unliked: res })).then(() => {
+        fetch(`${URL}api/activity/${this.state.video._id}`, {
+          method: "get",
+        }).then(res => res.json()).then(res => {
+          if (res !== undefined) {
+            this.setState({ unliked: res.UnLiked })
+          }
+        })
+      })
+    }
+    else {
+      this.setState({errorHappend:true})
+      
+    }
   };
   render() {
     const {
@@ -110,18 +118,25 @@ class Home extends PureComponent {
       Views,
       _id
     } = this.state.video;
-    const { Likes, DisLikes, liked, unliked } = this.state;
+    const { Likes, DisLikes, liked, unliked,errorHappend} = this.state;
     const styleLiked = liked ? ({ backgroundColor: "#ff4500", color: "#f7f7f7" }) : null
     const styleUNLiked = unliked ? ({ backgroundColor: "#ff4500", color: "#f7f7f7" }) : null
+    const styleError = errorHappend ? null : { display: "none" };
     return (
       <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+                <div style={styleError}>
+          <Error
+            message0={"Ops! "}
+            message1={`Please Login`}
+          />
+        </div>
         <div className="videoPlayer">
           <video
             poster={poster}
             style={{ width: "100%" }}
             src={`${URL}${filePath}`}
             controls
-            autoPlay
+            // autoPlay
           ></video>
           <div className="videoDetails">
             <p>{UploadDetails}</p>
